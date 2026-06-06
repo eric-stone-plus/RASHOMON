@@ -17,7 +17,7 @@ This is the exact problem facing single-agent AI systems. One model, one perspec
 QUINTE implements the second gate (證門 Shōmon) of the three-gate discipline:
 
 ```
-User asks a question
+                       User asks a question
                                  ▼
           ╔═══════════════════════════════════════════════╗
           ║  雨門 Amamon · Ambiguity Gate                  ║
