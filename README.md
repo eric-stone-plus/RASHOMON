@@ -20,7 +20,7 @@ QUINTE implements the second gate (證門 Shōmon) of the three-gate discipline:
 User asks a question
                                  ▼
           ╔═══════════════════════════════════════════════╗
-          ║  雨門 Amamon · Ambiguity Gate                   ║
+          ║  雨門 Amamon · Ambiguity Gate                  ║
           ║  (雨 = rain, the uncertainty before            ║
           ║   entering Rashomon's gate)                   ║
           ║                                               ║
@@ -36,7 +36,7 @@ User asks a question
                            Clarification
                                  ▼
           ╔═══════════════════════════════════════════════╗
-          ║  證門 Shōmon · QUINTE Gate                      ║
+          ║  證門 Shōmon · QUINTE Gate                     ║
           ║  (證 = testimony, evidence)                    ║
           ║                                               ║
           ║  Structured multi-agent debate                ║
@@ -57,7 +57,7 @@ User asks a question
                              Verification
                                   ▼
           ╔═══════════════════════════════════════════════╗
-          ║  閂門 Kan'nukimon · Anti-Drift Gate             ║
+          ║  閂門 Kan'nukimon · Anti-Drift Gate            ║
           ║  (閂 = bolt, latch — no collusion)             ║
           ║                                               ║
           ║  "No witness collusion"                       ║
