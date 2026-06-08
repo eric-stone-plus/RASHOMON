@@ -1,4 +1,4 @@
-# RASHOMON（羅生門）
+# RASHOMON (羅生門)
 
 > 芥川龍之介《藪の中》（1922）→ 黒澤明《羅生門》（1950）→ AI agent truth-seeking
 
