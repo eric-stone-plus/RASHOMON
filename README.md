@@ -16,49 +16,86 @@ This is the exact problem facing single-agent AI systems. One model, one perspec
 
 ## The Four Gates
 
-QUINTE operates through four mandatory gates, each preventing a distinct failure mode:
+QUINTE operates through four mandatory gates, each preventing a distinct failure mode.
+The gates follow the woodcutter's journey: arrive in rain, check your eyes, hear the witnesses, bolt the door.
 
 ```
                        User asks a question
+                                 │
                                  ▼
-          ╔═══════════════════════════════════════════════╗
-          ║  雨門 Amamon · Ambiguity Gate                  ║
-          ║  (雨 = rain, the uncertainty before entering)  ║
-          ║                                               ║
-          ║  "What am I actually being asked?"            ║
-          ║  Vague? → clarify() first.  Clear? → proceed. ║
-          ║  Operated by: Hermes (pre-debate check)       ║
-          ╚════════════════════════╤══════════════════════╝
-                                   │
-          ╔════════════════════════╧══════════════════════╗
-          ║  鏡門 Kyōmon · Mirror Gate                     ║
-          ║  (鏡 = mirror — reflects truth, never distorts)║
-          ║                                               ║
-          ║  "Did I see what I think I saw?"              ║
-          ║  [鏡門✓] bidirectional grep · ✅ 🛑 ⚠️       ║
-          ║  Operated by: Hermes (premise verification)   ║
-          ╚════════════════════════╤══════════════════════╝
-                                   │
-                    ┌──────────────┴──────────────┐
-                    ▼                             │
-          ╔══════════════════╗          ╔═════════╧════════╗
-          ║  證門 Shōmon      ║          ║  閂門 Kan'nukimon ║
-          ║  (證 = testimony) ║          ║  (閂 = bolt)     ║
-          ║                   ║          ║                  ║
-          ║  R1 · 4 agents    ║          ║  "No witness     ║
-          ║  R2 · 5 cross     ║          ║   collusion"     ║
-          ║  R3 · verdict     ║          ║                  ║
-          ║       ⚠️鏡門      ║─────────▶║  ① task-first   ║
-          ║                   ║          ║  ② ONLY Y       ║
-          ║  R2 never skipped ║          ║  ③ TASK: restate║
-          ║  Fatal?→restart R1║          ║                  ║
-          ║                   ║          ║  Drift?→kill+retry║
-          ║  Operated by:     ║          ║  Operated by:    ║
-          ║  Hermes+5 agents  ║          ║  Hermes (prompt) ║
-          ╚═══════╤══════════╝          ╚═══════╤══════════╝
-                  └─────────────┬─────────────────┘
-                                ▼
-                             Output
+   ╔══════════════════════════════════════════════════════════════════╗
+   ║  雨門 Amamon · Ambiguity Gate                                   ║
+   ║  (雨 = rain — the uncertainty before entering Rashōmon's gate)  ║
+   ║                                                                 ║
+   ║  "What am I actually being asked?"                              ║
+   ║                                                                 ║
+   ║  Vague or ambiguous?                                            ║
+   ║    ├─ Yes → clarify() first                                     ║
+   ║    └─ No  → pass through                                        ║
+   ║                                                                 ║
+   ║  Operated by: Hermes (pre-debate check)                         ║
+   ╚════════════════════════════════════════╤══════════════════════════╝
+                                            │
+                                            ▼
+                                      Clarification
+                                            │
+                                            ▼
+   ╔════════════════════════════════════════╧══════════════════════════╗
+   ║  鏡門 Kyōmon · Mirror Gate                                      ║
+   ║  (鏡 = mirror — reflects truth, never distorts. 八咫鏡)         ║
+   ║                                                                 ║
+   ║  "Did I see what I think I saw, or a trick of the light?"      ║
+   ║                                                                 ║
+   ║  Comparative claim made?                                        ║
+   ║    ├─ Bidirectional grep verification                           ║
+   ║    ├─ [鏡門 ✓] evidence tag required                            ║
+   ║    ├─ 🛑 falsified → fix & re-verify                           ║
+   ║    └─ ✅ verified → pass through                                ║
+   ║                                                                 ║
+   ║  Operated by: Hermes (premise verification)                     ║
+   ╚════════════════════════════════════════╤══════════════════════════╝
+                                            │
+                                            ▼
+                                     Verified premises
+                                            │
+                                            ▼
+   ╔════════════════════════════════════════╧══════════════════════════╗
+   ║  證門 Shōmon · QUINTE Gate                                      ║
+   ║  (證 = testimony, evidence — witnesses speak, truth emerges)    ║
+   ║                                                                 ║
+   ║  Structured multi-agent debate                                  ║
+   ║                                                                 ║
+   ║  R1 · 4 agents analyze independently (hm+cc+cw+omp)             ║
+   ║  R2 · 5 agents cross-review (+rx) — never skipped               ║
+   ║  R3 · Hermes synthesizes verdict · ⚠️ advisory 鏡門 (drift)     ║
+   ║                                                                 ║
+   ║  R2 finds fatal flaw? → restart R1 (once)                       ║
+   ║  Consensus can hide shared blind spots · R2 is the only check   ║
+   ║                                                                 ║
+   ║  Operated by: Hermes + 5 agents (R1–R3)                         ║
+   ╚════════════════════════════════════════╤══════════════════════════╝
+                                            │
+                                            ▼
+                                       Verification
+                                            │
+                                            ▼
+   ╔════════════════════════════════════════╧══════════════════════════╗
+   ║  閂門 Kan'nukimon · Anti-Drift Gate                              ║
+   ║  (閂 = bolt, latch — no witness collusion)                       ║
+   ║                                                                 ║
+   ║  "No witness collusion" — each prompt must be independent       ║
+   ║                                                                 ║
+   ║  Every prompt to external agents must use three-layer defense:   ║
+   ║    ① Task-first (task before context, not after)                ║
+   ║    ② ONLY Y, not NOT X — positive framing prevents collision    ║
+   ║    ③ TASK: restatement required — drift caught in first line    ║
+   ║                                                                 ║
+   ║  Drift detected? → kill & retry with shrunk prompt              ║
+   ║  Operated by: Hermes (prompt construction)                      ║
+   ╚════════════════════════════════════════╤══════════════════════════╝
+                                            │
+                                            ▼
+                                         Output
 ```
 
 ## Structure
