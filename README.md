@@ -14,6 +14,8 @@ Kurosawa's *Rashomon* (1950) presents four witnesses to the same event offering 
 
 This is the exact problem facing single-agent AI systems. One model, one perspective, one blind spot. The answer isn't a better model — it's a *structure that forces perspectives to confront each other*.
 
+But confrontation alone is not the mechanism. The deeper property — the one that makes RASHOMON a paradigm, not just a voting scheme — is **cross-detection**: an agent reviewing *another's* output in R2 can spot errors it could never have caught in its own R1. Self-review is epistemologically closed — you cannot see the blind spot you are standing in. Cross-review breaks that closure. Each agent carries its own distribution of errors into R1; R2 is where those errors become visible to agents who don't share them. The value is not "majority wins" — it is that the error an agent cannot self-detect is precisely the error another agent's position allows it to see.
+
 ## The Four Gates
 
 QUINTE operates through four mandatory gates, each preventing a distinct failure mode.
