@@ -19,6 +19,8 @@ Rashomon Depth = |{ genuinely different reasoning paths }|
 
 **经验法则**: 如果四方 R1 输出惊人一致且无人说"不确定"，**这可能是共享盲区，不是共识**。罗生门里如果四个人说的完全一样，反而可疑。
 
+**与鏡門的关系**: 镜門保护 Depth。若 hm 的前提已被方向错误污染，所有 agent 走在同一条错路上 → Depth 降至 1，QUINTE 最致命的失败模式。
+
 ---
 
 ## 藪の中指数（Yabu no Naka Index）
@@ -51,6 +53,18 @@ YNI = 1 - (各方论点交集 / 各方论点并集)
 
 ---
 
+## 镜門拦截率（Kyōmon Interception Rate）
+
+**定义**: 镜門捕获的错误占所有比较声明的比率。
+
+```
+Kyōmon IR = errors_caught / comparative_claims_made
+```
+
+**用途**: 衡量 hm 方向错误的发生频率和镜門的有效性。纳入 QUINTE 事后分析。
+
+---
+
 ## 术语表
 
 | 术语 | 日语 | 读音 | 含义 |
@@ -58,7 +72,9 @@ YNI = 1 - (各方论点交集 / 各方论点并集)
 | Rashomon Depth | — | — | 独立视角数 |
 | Yabu no Naka Index | 藪の中 | やぶのなか | R1 分歧度 |
 | Kurosawa Check | — | — | R2 强制交叉审 |
+| Kyōmon IR | — | — | 镜門拦截率 |
 | Amamon | 雨門 | あまもん | Ambiguity gate |
+| Kyōmon | 鏡門 | きょうもん | Mirror gate |
 | Shōmon | 證門 | しょうもん | QUINTE gate |
 | Kan'nukimon | 閂門 | かんぬきもん | Anti-Drift gate |
 
@@ -68,9 +84,11 @@ YNI = 1 - (各方论点交集 / 各方论点并集)
 
 | 隐喻概念 | 协议术语 | PROTOCOL.md 位置 |
 |---------|---------|-----------------|
-| Rashomon Depth | agent 独立视角质量 | §3 Invariants (no model-tier degradation) |
-| Yabu no Naka Index | R2 分歧标注 | §2.3 Final Verdict (adjudication rules) |
-| Kurosawa Check | R2 强制交叉审 | §2.2 Cross-Review (R2 is mandatory) |
-| Amamon | Ambiguity gate | SOUL.md (persona-level, not in PROTOCOL.md) |
-| Shōmon | QUINTE discipline | §1-5 (full protocol) |
-| Kan'nukimon | Agent dispatch anti-drift | §7 Agent Dispatch Requirements |
+| Rashomon Depth | agent 独立视角质量 | §3 Invariants |
+| Yabu no Naka Index | R2 分歧标注 | §2.3 Final Verdict |
+| Kurosawa Check | R2 强制交叉审 | §2.2 Cross-Review |
+| Kyōmon IR | 镜門拦截率度量 | SOUL.md § Mirror gate |
+| Amamon | Ambiguity gate | SOUL.md |
+| Kyōmon | Mirror gate | SOUL.md |
+| Shōmon | QUINTE discipline | §1-5 |
+| Kan'nukimon | Agent dispatch anti-drift | §7 |

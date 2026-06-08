@@ -14,11 +14,9 @@ Kurosawa's *Rashomon* (1950) presents four witnesses to the same event offering 
 
 This is the exact problem facing single-agent AI systems. One model, one perspective, one blind spot. The answer isn't a better model — it's a *structure that forces perspectives to confront each other*.
 
-## The QUINTE Answer
+## The Four Gates
 
-[QUINTE](https://github.com/eric-stone-plus/QUINTE) is the engineering layer — a five-agent structured debate protocol that operationalizes the Rashomon insight. Where RASHOMON asks *why*, QUINTE builds *how*.
-
-QUINTE implements the second gate (證門 Shōmon) of the three-gate discipline:
+QUINTE operates through four mandatory gates, each preventing a distinct failure mode:
 
 ```
                        User asks a question
@@ -40,6 +38,24 @@ QUINTE implements the second gate (證門 Shōmon) of the three-gate discipline:
                            Clarification
                                  ▼
           ╔═══════════════════════════════════════════════╗
+          ║  鏡門 Kyōmon · Mirror Gate                     ║
+          ║  (鏡 = mirror — reflects truth,               ║
+          ║   never distorts)                             ║
+          ║                                               ║
+          ║  "Did I see what I think I saw?"             ║
+          ║                                               ║
+          ║  Comparative claim made?                      ║
+          ║    ├─ Bidirectional grep verification         ║
+          ║    ├─ [鏡門 ✓] evidence tag required          ║
+          ║    ├─ 🛑 falsified → fix & re-verify         ║
+          ║    └─ ✅ verified → pass through              ║
+          ║                                               ║
+          ║  Operated by: Hermes (premise verification)   ║
+          ╚═══════════════════════════════════════════════╝
+                                 ▼
+                        Verified premises
+                                 ▼
+          ╔═══════════════════════════════════════════════╗
           ║  證門 Shōmon · QUINTE Gate                     ║
           ║  (證 = testimony, evidence)                    ║
           ║                                               ║
@@ -48,6 +64,7 @@ QUINTE implements the second gate (證門 Shōmon) of the three-gate discipline:
           ║  R1 · 4 agents analyze independently          ║
           ║  R2 · 5 agents cross-review                   ║
           ║  R3 · Hermes synthesizes verdict              ║
+          ║       └── advisory 鏡門 ⚠️ (drift check)     ║
           ║                                               ║
           ║  R2 never skipped — consensus can             ║
           ║  hide shared blind spots                      ║
@@ -87,8 +104,8 @@ QUINTE implements the second gate (證門 Shōmon) of the three-gate discipline:
 
 | File | Content |
 |------|---------|
-| [GATES.md](GATES.md) | The Three Gates — 雨門·證門·閂門 |
-| [CONCEPTS.md](CONCEPTS.md) | Core concepts — Rashomon Depth, YNI, Kurosawa Check |
+| [GATES.md](GATES.md) | The Four Gates — 雨門·鏡門·證門·閂門 |
+| [CONCEPTS.md](CONCEPTS.md) | Core concepts — Rashomon Depth, YNI, Kurosawa Check, Kyōmon IR |
 | [PHENOMENOLOGY.md](PHENOMENOLOGY.md) | Phenomenological expansion (forthcoming) |
 
 ## Cultural Anchors
