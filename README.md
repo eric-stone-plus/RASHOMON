@@ -19,33 +19,29 @@ This is the exact problem facing single-agent AI systems. One model, one perspec
 QUINTE operates through four mandatory gates, each preventing a distinct failure mode:
 
 ```
-                         User asks a question
-                                 │
-   ┌─────────────────────────────┼─────────────────────────────┐
-   │                             ▼                             │
-   │   ╔══════════════════════╗          ╔══════════════════╗   │
-   │   ║  雨門 Amamon         ║─────────▶║  鏡門 Kyōmon      ║   │
-   │   ║  Ambiguity Gate      ║          ║  Mirror Gate      ║   │
-   │   ║                      ║          ║                   ║   │
-   │   ║  "What am I          ║          ║  "Did I see       ║   │
-   │   ║   being asked?"      ║          ║   correctly?"     ║   │
-   │   ║                      ║          ║                   ║   │
-   │   ║  clarify()           ║          ║  [鏡門 ✓] grep    ║   │
-   │   ╚══════╤══════════════╝          ╚══════╤═══════════╝   │
-   │          │                                 │              │
-   │          │                                 │              │
-   │   ╔══════╧══════════════╗          ╔══════╧═══════════╗   │
-   │   ║  閂門 Kan'nukimon    ║◀─────────║  證門 Shōmon     ║   │
-   │   ║  Anti-Drift Gate     ║          ║  QUINTE Gate     ║   │
-   │   ║                      ║          ║                   ║   │
-   │   ║  "No collusion"      ║          ║  R1 → R2 → R3    ║   │
-   │   ║                      ║          ║  5-agent debate   ║   │
-   │   ║  ①②③ 3-layer       ║          ║  ⚠️ advisory 鏡門 ║   │
-   │   ╚══════╤══════════════╝          ╚══════════════════╝   │
-   │          │                                                 │
-   └──────────┼─────────────────────────────────────────────────┘
-              ▼
-           Output
+                  User
+                   │
+                   ▼
+        ┌──────────────┐     ┌──────────────┐
+        │ 雨門 Amamon   │────▶│ 鏡門 Kyōmon   │
+        │ Ambiguity     │     │ Mirror        │
+        │ ────────────  │     │ ────────────  │
+        │ 问对了吗?      │     │ 看对了吗?      │
+        │ clarify()     │     │ [鏡門✓]6规则  │
+        │ 防:问错问题    │     │ 防:方向错误    │
+        └──────┬───────┘     └──────┬───────┘
+               │                    │
+        ┌──────┴───────┐     ┌──────┴───────┐
+        │ 閂門Kan'nukimon│◀────│ 證門 Shōmon   │
+        │ Anti-Drift    │     │ QUINTE        │
+        │ ────────────  │     │ ────────────  │
+        │ 不许串供       │     │ 交叉对质       │
+        │ ①②③ 3层法   │     │ R1→R2→R3     │
+        │ 防:prompt污染  │     │ 防:单一视角    │
+        └──────┬───────┘     └──────────────┘
+               │
+               ▼
+            Output
 ```
 
 ## Structure
