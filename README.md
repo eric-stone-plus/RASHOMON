@@ -1,63 +1,42 @@
-# RASHOMON
-
-> 芥川龍之介《藪の中》（1922）→ 黒澤明《羅生門》（1950）→ AI agent truth-seeking
-
-**RASHOMON** is the philosophical foundation of the QUINTE debate protocol. It asks the question QUINTE is built to answer: *when a single perspective cannot be trusted, how do we converge on actionable truth?*
-
-## About
-
-RASHOMON is the philosophical companion to [QUINTE](https://github.com/eric-stone-plus/QUINTE), a five-agent structured debate protocol. Where QUINTE specifies *how* to orchestrate multi-agent cross-examination, RASHOMON explores *why* this approach is necessary — grounding the protocol in Kurosawa's 1950 film *Rashomon* and the broader problem of single-perspective truth in AI systems.
-
-## The Rashomon Problem
-
-Kurosawa's *Rashomon* (1950) presents four witnesses to the same event offering mutually contradictory testimonies. Not because anyone is lying — but because each person sees only what their position allows them to see.
-
-This is the exact problem facing single-agent AI systems. One model, one perspective, one blind spot. The answer isn't a better model — it's a *structure that forces perspectives to confront each other*.
-
-## The Four Gates
-
-QUINTE operates through four mandatory gates, each preventing a distinct failure mode:
-
 ```
-                  User
-                   │
-                   ▼
-        ┌──────────────┐     ┌──────────────┐
-        │ 雨門 Amamon   │────▶│ 鏡門 Kyōmon   │
-        │ Ambiguity     │     │ Mirror        │
-        │ ────────────  │     │ ────────────  │
-        │ 问对了吗?      │     │ 看对了吗?      │
-        │ clarify()     │     │ [鏡門✓]6规则  │
-        │ 防:问错问题    │     │ 防:方向错误    │
-        └──────┬───────┘     └──────┬───────┘
-               │                    │
-        ┌──────┴───────┐     ┌──────┴───────┐
-        │ 閂門Kan'nukimon│◀────│ 證門 Shōmon   │
-        │ Anti-Drift    │     │ QUINTE        │
-        │ ────────────  │     │ ────────────  │
-        │ 不许串供       │     │ 交叉对质       │
-        │ ①②③ 3层法   │     │ R1→R2→R3     │
-        │ 防:prompt污染  │     │ 防:单一视角    │
-        └──────┬───────┘     └──────────────┘
-               │
-               ▼
-            Output
+                      User asks a question
+                               │
+                               ▼
+   ╔══════════════════════════════════════════════════════════╗
+   ║  雨門 Amamon · Ambiguity Gate                           ║
+   ║  (雨 = rain — the uncertainty before entering)          ║
+   ║                                                        ║
+   ║  "What am I actually being asked?"                     ║
+   ║  Vague? → clarify() first.  Clear? → pass through.     ║
+   ║  stops: wrong question                                 ║
+   ╚════════════════════════╤═════════════════════════════════╝
+                            │
+   ╔════════════════════════╧═════════════════════════════════╗
+   ║  鏡門 Kyōmon · Mirror Gate                              ║
+   ║  (鏡 = mirror — reflects truth, never distorts)        ║
+   ║                                                        ║
+   ║  "Did I see what I think I saw?"                       ║
+   ║  [鏡門✓] bidirectional grep · ✅ pass / 🛑 fix / ⚠️ note ║
+   ║  stops: misread facts                                  ║
+   ╚════════════════════════╤═════════════════════════════════╝
+                            │
+          ┌─────────────────┴─────────────────┐
+          ▼                                   ▼
+   ╔══════════════════╗            ╔══════════════════╗
+   ║  證門 Shōmon      ║            ║  閂門 Kan'nukimon  ║
+   ║  (證 = testimony) ║            ║  (閂 = bolt)      ║
+   ║                   ║            ║                   ║
+   ║  R1: 4 agents     ║            ║  "No witness      ║
+   ║  R2: 5 cross      ║            ║   collusion"      ║
+   ║  R3: verdict      ║            ║                   ║
+   ║                   ║            ║  ① task-first    ║
+   ║  R2 fatal flaw?   ║            ║  ② ONLY Y        ║
+   ║   └─ restart R1   ║            ║  ③ TASK: restate ║
+   ║                   ║            ║                   ║
+   ║  stops: single    ║            ║  stops: prompt    ║
+   ║  perspective      ║            ║  contamination    ║
+   ╚═══════╤══════════╝            ╚═══════╤══════════╝
+           └─────────────┬─────────────────┘
+                         ▼
+                      Output
 ```
-
-## Structure
-
-| File | Content |
-|------|---------|
-| [GATES.md](GATES.md) | The Four Gates — 雨門·鏡門·證門·閂門 |
-| [CONCEPTS.md](CONCEPTS.md) | Core concepts — Rashomon Depth, YNI, Kurosawa Check, Kyōmon IR |
-| [PHENOMENOLOGY.md](PHENOMENOLOGY.md) | Phenomenological expansion (forthcoming) |
-
-## Cultural Anchors
-
-- **芥川龍之介**《藪の中》（1922）— seven testimonies, one death, no resolution
-- **黒澤明**《羅生門》（1950）— Venice Golden Lion, Academy Award for Best Foreign Language Film
-- **Rashomon Effect** — entered English academic vocabulary: contradictory interpretations of the same event by different observers
-
-## License
-
-MIT
