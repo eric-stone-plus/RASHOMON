@@ -19,33 +19,33 @@ This is the exact problem facing single-agent AI systems. One model, one perspec
 QUINTE operates through four mandatory gates, each preventing a distinct failure mode:
 
 ```
-                              User asks a question
-                                      │
-        ┌─────────────────────────────┼─────────────────────────────┐
-        │                             ▼                             │
-        │   ╔══════════════════════╗          ╔══════════════════╗   │
-        │   ║  雨門 Amamon         ║─────────▶║  鏡門 Kyōmon      ║   │
-        │   ║  Ambiguity Gate      ║          ║  Mirror Gate      ║   │
-        │   ║                      ║          ║                   ║   │
-        │   ║  "What am I          ║          ║  "Did I see       ║   │
-        │   ║   being asked?"      ║          ║   correctly?"     ║   │
-        │   ║                      ║          ║                   ║   │
-        │   ║  clarify()           ║          ║  [鏡門 ✓] grep    ║   │
-        │   ╚══════════════════════╝          ╚══════╤═══════════╝   │
-        │           ▲                                 │              │
-        │           │                                 │              │
-        │   ╔═══════╧══════════════╗          ╔══════╧═══════════╗   │
-        │   ║  閂門 Kan'nukimon    ║◀─────────║  證門 Shōmon     ║   │
-        │   ║  Anti-Drift Gate     ║          ║  QUINTE Gate     ║   │
-        │   ║                      ║          ║                   ║   │
-        │   ║  "No collusion"      ║          ║  R1 → R2 → R3    ║   │
-        │   ║                      ║          ║  5-agent debate   ║   │
-        │   ║  ①②③ 3-layer       ║          ║  ⚠️ advisory 鏡門 ║   │
-        │   ╚══════╤══════════════╝          ╚══════════════════╝   │
-        │          │                                                 │
-        └──────────┼─────────────────────────────────────────────────┘
-                   ▼
-                Output
+                         User asks a question
+                                 │
+   ┌─────────────────────────────┼─────────────────────────────┐
+   │                             ▼                             │
+   │   ╔══════════════════════╗          ╔══════════════════╗   │
+   │   ║  雨門 Amamon         ║─────────▶║  鏡門 Kyōmon      ║   │
+   │   ║  Ambiguity Gate      ║          ║  Mirror Gate      ║   │
+   │   ║                      ║          ║                   ║   │
+   │   ║  "What am I          ║          ║  "Did I see       ║   │
+   │   ║   being asked?"      ║          ║   correctly?"     ║   │
+   │   ║                      ║          ║                   ║   │
+   │   ║  clarify()           ║          ║  [鏡門 ✓] grep    ║   │
+   │   ╚══════╤══════════════╝          ╚══════╤═══════════╝   │
+   │          │                                 │              │
+   │          │                                 │              │
+   │   ╔══════╧══════════════╗          ╔══════╧═══════════╗   │
+   │   ║  閂門 Kan'nukimon    ║◀─────────║  證門 Shōmon     ║   │
+   │   ║  Anti-Drift Gate     ║          ║  QUINTE Gate     ║   │
+   │   ║                      ║          ║                   ║   │
+   │   ║  "No collusion"      ║          ║  R1 → R2 → R3    ║   │
+   │   ║                      ║          ║  5-agent debate   ║   │
+   │   ║  ①②③ 3-layer       ║          ║  ⚠️ advisory 鏡門 ║   │
+   │   ╚══════╤══════════════╝          ╚══════════════════╝   │
+   │          │                                                 │
+   └──────────┼─────────────────────────────────────────────────┘
+              ▼
+           Output
 ```
 
 ## Structure
