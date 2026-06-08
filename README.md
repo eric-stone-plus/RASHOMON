@@ -98,17 +98,18 @@ The gates follow the woodcutter's journey: arrive in rain, check your eyes, hear
 | [CONCEPTS.md](CONCEPTS.md) | Core concepts — Rashomon Depth, YNI, Kurosawa Check, Kyōmon IR |
 | [PHENOMENOLOGY.md](PHENOMENOLOGY.md) | Phenomenological expansion (forthcoming) |
 
-## Trilogy
+## Ecosystem
 
-RASHOMON is part of a three-repo framework for reliable AI agents:
+RASHOMON is part of a five-repo framework for reliable AI agents:
 
 | Repo | Role | Question |
 |------|------|----------|
 | [RASHOMON](https://github.com/eric-stone-plus/RASHOMON) | Design philosophy | *Why* multi-perspective truth-seeking? |
 | [QUINTE](https://github.com/eric-stone-plus/QUINTE) | Debate protocol | *How* to orchestrate cross-examination? |
+| [KANSA](https://github.com/eric-stone-plus/KANSA) | Verdict audit | *Sound?* Does the R3 conclusion hold up? |
 | [KENGEN](https://github.com/eric-stone-plus/KENGEN) | Authorization perimeter | *May I* execute this operation? |
 
-RASHOMON and QUINTE form the epistemology→methodology axis. KENGEN is orthogonal — a safety rail that gates whether conclusions may become external actions, regardless of how they were reached. Each is necessary; none is sufficient alone.
+RASHOMON and QUINTE form the epistemology→methodology axis. KANSA audits R3 verdicts. KENGEN gates external actions with BANNIN (番人) as the active session-level guard. Each is necessary; none is sufficient alone.
 
 ## Cultural Anchors
 
