@@ -20,47 +20,42 @@ QUINTE operates through four mandatory gates, each preventing a distinct failure
 The gates follow the woodcutter's journey: arrive in rain, check your eyes, hear the witnesses, bolt the door.
 
 ```
-                       User asks a question
-                                 │
-                                 ▼
+                           User asks a question
+                                    ▼
    ╔══════════════════════════════════════════════════════════════════╗
-   ║  雨門 Amamon · Ambiguity Gate                                   ║
-   ║  (雨 = rain — the uncertainty before entering Rashōmon's gate)  ║
-   ║                                                                 ║
-   ║  "What am I actually being asked?"                              ║
-   ║                                                                 ║
-   ║  Vague or ambiguous?                                            ║
-   ║    ├─ Yes → clarify() first                                     ║
-   ║    └─ No  → pass through                                        ║
-   ║                                                                 ║
-   ║  Operated by: Hermes (pre-debate check)                         ║
-   ╚════════════════════════════════════════╤══════════════════════════╝
-                                            │
-                                            ▼
-                                      Clarification
-                                            │
-                                            ▼
-   ╔════════════════════════════════════════╧══════════════════════════╗
-   ║  鏡門 Kyōmon · Mirror Gate                                      ║
-   ║  (鏡 = mirror — reflects truth, never distorts. 八咫鏡)         ║
-   ║                                                                 ║
-   ║  "Did I see what I think I saw, or a trick of the light?"      ║
-   ║                                                                 ║
-   ║  Comparative claim made?                                        ║
-   ║    ├─ Bidirectional grep verification                           ║
-   ║    ├─ [鏡門 ✓] evidence tag required                            ║
-   ║    ├─ 🛑 falsified → fix & re-verify                           ║
-   ║    └─ ✅ verified → pass through                                ║
-   ║                                                                 ║
-   ║  Operated by: Hermes (premise verification)                     ║
-   ╚════════════════════════════════════════╤══════════════════════════╝
-                                            │
-                                            ▼
-                                     Verified premises
-                                            │
-                                            ▼
-   ╔════════════════════════════════════════╧══════════════════════════╗
-   ║  證門 Shōmon · QUINTE Gate                                      ║
+   ║  雨門 Amamon · Ambiguity Gate                                     ║
+   ║  (雨 = rain — the uncertainty before entering Rashōmon's gate)   ║
+   ║                                                                  ║
+   ║  "What am I actually being asked?"                               ║
+   ║                                                                  ║
+   ║  Vague or ambiguous?                                             ║
+   ║    ├─ Yes → clarify() first                                      ║
+   ║    └─ No  → pass through                                         ║
+   ║                                                                  ║
+   ║  Operated by: Hermes (pre-debate check)                          ║
+   ╚══════════════════════════════════════════════════════════════════╝
+                                    ▼
+                              Clarification
+                                    ▼
+   ╔══════════════════════════════════════════════════════════════════╗
+   ║  鏡門 Kyōmon · Mirror Gate                                        ║
+   ║  (鏡 = mirror — reflects truth, never distorts. 八咫鏡)            ║
+   ║                                                                  ║
+   ║  "Did I see what I think I saw, or a trick of the light?"        ║
+   ║                                                                  ║
+   ║  Comparative claim made?                                         ║
+   ║    ├─ Bidirectional grep verification                            ║
+   ║    ├─ [鏡門 ✓] evidence tag required                              ║
+   ║    ├─ 🛑 falsified → fix & re-verify                             ║
+   ║    └─ ✅ verified → pass through                                 ║
+   ║                                                                  ║
+   ║  Operated by: Hermes (premise verification)                      ║
+   ╚══════════════════════════════════════════════════════════════════╝
+                                    ▼
+                            Verified Premises
+                                    ▼
+   ╔═════════════════════════════════════════════════════════════════╗
+   ║  證門 Shōmon · QUINTE Gate                                       ║
    ║  (證 = testimony, evidence — witnesses speak, truth emerges)    ║
    ║                                                                 ║
    ║  Structured multi-agent debate                                  ║
@@ -73,13 +68,11 @@ The gates follow the woodcutter's journey: arrive in rain, check your eyes, hear
    ║  Consensus can hide shared blind spots · R2 is the only check   ║
    ║                                                                 ║
    ║  Operated by: Hermes + 5 agents (R1–R3)                         ║
-   ╚════════════════════════════════════════╤══════════════════════════╝
-                                            │
-                                            ▼
-                                       Verification
-                                            │
-                                            ▼
-   ╔════════════════════════════════════════╧══════════════════════════╗
+   ╚═════════════════════════════════════════════════════════════════╝
+                                    ▼
+                              Verification
+                                    ▼
+   ╔═════════════════════════════════════════════════════════════════╗
    ║  閂門 Kan'nukimon · Anti-Drift Gate                              ║
    ║  (閂 = bolt, latch — no witness collusion)                       ║
    ║                                                                 ║
@@ -92,10 +85,9 @@ The gates follow the woodcutter's journey: arrive in rain, check your eyes, hear
    ║                                                                 ║
    ║  Drift detected? → kill & retry with shrunk prompt              ║
    ║  Operated by: Hermes (prompt construction)                      ║
-   ╚════════════════════════════════════════╤══════════════════════════╝
-                                            │
-                                            ▼
-                                         Output
+   ╚═════════════════════════════════════════════════════════════════╝
+                                    ▼
+                                  Output
 ```
 
 ## Structure
