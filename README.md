@@ -6,7 +6,7 @@
 
 ## About
 
-RASHOMON is the philosophical companion to [QUINTE](https://github.com/eric-stone-plus/QUINTE), a five-agent structured debate protocol, and to [KENGEN](https://github.com/eric-stone-plus/KENGEN), the agent authorization perimeter. Where QUINTE specifies *how* to orchestrate multi-agent cross-examination and KENGEN defines *whether* an operation may proceed, RASHOMON explores *why* this approach is necessary — grounding the protocol in Kurosawa's 1950 film *Rashomon* and the broader problem of single-perspective truth in AI systems.
+RASHOMON is the philosophical companion to [QUINTE](https://github.com/eric-stone-plus/QUINTE), a five-agent structured debate protocol; to [KANSA](https://github.com/eric-stone-plus/KANSA), the R3 verdict audit layer; and to [KENGEN](https://github.com/eric-stone-plus/KENGEN), the agent authorization perimeter. Where QUINTE specifies *how* to orchestrate multi-agent cross-examination, KANSA audits *whether* the verdict holds up, and KENGEN defines *whether* an operation may proceed — RASHOMON explores *why* this approach is necessary, grounding the protocol in Kurosawa's 1950 film *Rashomon* and the broader problem of single-perspective truth in AI systems.
 
 ## The Rashomon Problem
 
@@ -100,7 +100,7 @@ The gates follow the woodcutter's journey: arrive in rain, check your eyes, hear
 
 ## Ecosystem
 
-RASHOMON is part of a five-repo framework for reliable AI agents:
+RASHOMON is part of a four-repo framework for reliable AI agents:
 
 | Repo | Role | Question |
 |------|------|----------|
