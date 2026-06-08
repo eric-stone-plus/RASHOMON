@@ -6,7 +6,7 @@
 
 ## About
 
-RASHOMON is the philosophical companion to [QUINTE](https://github.com/eric-stone-plus/QUINTE), a five-agent structured debate protocol. Where QUINTE specifies *how* to orchestrate multi-agent cross-examination, RASHOMON explores *why* this approach is necessary — grounding the protocol in Kurosawa's 1950 film *Rashomon* and the broader problem of single-perspective truth in AI systems.
+RASHOMON is the philosophical companion to [QUINTE](https://github.com/eric-stone-plus/QUINTE), a five-agent structured debate protocol, and to [KENGEN](https://github.com/eric-stone-plus/KENGEN), the agent authorization perimeter. Where QUINTE specifies *how* to orchestrate multi-agent cross-examination and KENGEN defines *whether* an operation may proceed, RASHOMON explores *why* this approach is necessary — grounding the protocol in Kurosawa's 1950 film *Rashomon* and the broader problem of single-perspective truth in AI systems.
 
 ## The Rashomon Problem
 
@@ -97,6 +97,18 @@ The gates follow the woodcutter's journey: arrive in rain, check your eyes, hear
 | [GATES.md](GATES.md) | The Four Gates — 雨門·鏡門·證門·閂門 |
 | [CONCEPTS.md](CONCEPTS.md) | Core concepts — Rashomon Depth, YNI, Kurosawa Check, Kyōmon IR |
 | [PHENOMENOLOGY.md](PHENOMENOLOGY.md) | Phenomenological expansion (forthcoming) |
+
+## Trilogy
+
+RASHOMON is part of a three-repo framework for reliable AI agents:
+
+| Repo | Role | Question |
+|------|------|----------|
+| [RASHOMON](https://github.com/eric-stone-plus/RASHOMON) | Design philosophy | *Why* multi-perspective truth-seeking? |
+| [QUINTE](https://github.com/eric-stone-plus/QUINTE) | Debate protocol | *How* to orchestrate cross-examination? |
+| [KENGEN](https://github.com/eric-stone-plus/KENGEN) | Authorization perimeter | *May I* execute this operation? |
+
+RASHOMON and QUINTE form the epistemology→methodology axis. KENGEN is orthogonal — a safety rail that gates whether conclusions may become external actions, regardless of how they were reached. Each is necessary; none is sufficient alone.
 
 ## Cultural Anchors
 
