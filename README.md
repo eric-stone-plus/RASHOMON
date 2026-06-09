@@ -1,12 +1,36 @@
 # RASHOMON (羅生門)
 
-> 芥川龍之介《藪の中》（1922）→ 黒澤明《羅生門》（1950）→ AI agent truth-seeking
+> 芥川龍之介《藪の中》（1922）→ 黒澤明《羅生門》（1950）→ Claude Code orchestrated truth-seeking
 
 **RASHOMON** is the philosophical foundation of the QUINTE debate protocol. It asks the question QUINTE is built to answer: *when a single perspective cannot be trusted, how do we converge on actionable truth?*
 
-## About
+## v3.0: The Orchestration-Oversight Separation
 
-RASHOMON is the philosophical companion to [QUINTE](https://github.com/eric-stone-plus/QUINTE), a five-agent structured debate protocol; to [KANSA](https://github.com/eric-stone-plus/KANSA), the R3 verdict audit layer; and to [KENGEN](https://github.com/eric-stone-plus/KENGEN), the agent authorization perimeter. Where QUINTE specifies *how* to orchestrate multi-agent cross-examination, KANSA audits *whether* the verdict holds up, and KENGEN defines *whether* an operation may proceed — RASHOMON explores *why* this approach is necessary, grounding the protocol in Kurosawa's 1950 film *Rashomon* and the broader problem of single-perspective truth in AI systems.
+QUINTE v3.0 (2026-06-09) introduced a fundamental architectural insight: **the entity that executes the debate should not be the same entity that judges its quality.** This is not a technical preference — it is an epistemological necessity.
+
+In v2.x, Hermes was both orchestrator (deciding who speaks, in what order, on what topic) and participant (producing analysis). This created an intrinsic conflict of interest: the orchestrator could unconsciously trim the debate to fit its own analytical conclusions — skipping agents it deemed "unnecessary," narrowing scope based on its own blind spots, treating its own R1 conclusions as ground truth for R2 synthesis.
+
+The v3.0 architecture separates these concerns:
+
+```
+Claude Code (Execution Domain)          Hermes (Oversight Domain)
+──────────────────────────────          ──────────────────────────
+Workflow pipeline/parallel              Per-phase synchronous veto
+Agent dispatch with JSON Schema         Drift detection across rounds
+Adversarial verification                Quality audit of claims
+loop-until-dry convergence              ABORT authority on cascade
+Structured logging                      Context injection from memory
+Bash external agent calls               User communication layer
+```
+
+**Why cc?** Claude Code possesses three native mechanisms that Hermes cannot replicate:
+1. **Agent** — internal sub-agents with independent contexts for specialized review
+2. **Workflow** — pipeline/parallel/adversarial-verification/judge-panel/loop-until-dry as first-class primitives
+3. **Bash** — direct invocation of external agents (hm, cw, omp, rx) within orchestration logic
+
+These are not "better tools." They are a different category of capability — structural guarantees (pipeline cannot skip an agent; schema validation cannot miss a malformed claim) that replace fallible human-model discipline with mechanical enforcement.
+
+**Why hm retains veto power?** The separation is not about "cc is better than hm." It is about comparative advantage. hm's xhigh reasoning is best applied to auditing orchestration plans (spotting omissions, detecting drift, catching cascade failures) rather than executing them. The synchronous veto — hm must APPROVE every phase output before cc proceeds — ensures the oversight is real, not ceremonial.
 
 ## The Rashomon Problem
 
@@ -16,102 +40,72 @@ This is the exact problem facing single-agent AI systems. One model, one perspec
 
 But confrontation alone is not the mechanism. The deeper property — the one that makes RASHOMON a paradigm, not just a voting scheme — is **cross-detection**: an agent reviewing *another's* output in R2 can spot errors it could never have caught in its own R1. Self-review is epistemologically closed — you cannot see the blind spot you are standing in. Cross-review breaks that closure. Each agent carries its own distribution of errors into R1; R2 is where those errors become visible to agents who don't share them. The value is not "majority wins" — it is that the error an agent cannot self-detect is precisely the error another agent's position allows it to see.
 
+### v3.0 Extension: Cross-Model Adversarial Depth
+
+v2.x treated all four witnesses as epistemologically equivalent — four DeepSeek instances with different system prompts. v3.0 recognizes that **same-model consensus is weaker than cross-model consensus.** Three DeepSeek instances agreeing gives you 1 verification with 3 samples of the same noise distribution. Cross-model adversarial verification (≥1 refuter from different provider) decorrelates errors across architectures, training data, and RLHF alignment — producing genuinely independent verification rather than same-model echo.
+
 ## The Four Gates
 
-QUINTE operates through four mandatory gates, each preventing a distinct failure mode.
-The gates follow the woodcutter's journey: arrive in rain, check your eyes, hear the witnesses, bolt the door.
+QUINTE v3.0 operates through four mandatory gates, executed in parallel by Hermes (~5s). The gates follow the woodcutter's journey: arrive in rain, check your eyes, hear the witnesses, bolt the door.
 
 ```
                            User asks a question
                                     ▼
-   ╔══════════════════════════════════════════════════════════════════╗
-   ║  雨門 Amamon · Ambiguity Gate                                     ║
-   ║  (雨 = rain — the uncertainty before entering Rashōmon's gate)   ║
-   ║                                                                  ║
-   ║  "What am I actually being asked?"                               ║
-   ║                                                                  ║
-   ║  Vague or ambiguous?                                             ║
-   ║    ├─ Yes → clarify() first                                      ║
-   ║    └─ No  → pass through                                         ║
-   ║                                                                  ║
-   ║  Operated by: Hermes (pre-debate check)                          ║
-   ╚══════════════════════════════════════════════════════════════════╝
+   ┌──────────────────────────────────────────────────────────────────┐
+   │               Four Gates — Parallel Execution (~5s)               │
+   │                                                                  │
+   │  ┌────────────┐ ┌────────────┐ ┌────────────┐ ┌────────────┐  │
+   │  │ 雨門 Amamon │ │ 鏡門 Kyōmon│ │ 證門 Shōmon│ │ 閂門 Kan'nu │  │
+   │  │  "Am I      │ │  "Did I    │ │  "Does this│ │  "No witness│  │
+   │  │   asking    │ │   see what │ │   need full│ │   collusion"│  │
+   │  │   the right │ │   I think  │ │   QUINTE?" │ │             │  │
+   │  │   question?"│ │   I saw?"  │ │            │ │             │  │
+   │  │            │ │            │ │            │ │             │  │
+   │  │  Ambiguous?│ │  Compara-  │ │  Conclus-  │ │  Every      │  │
+   │  │  → clarify │ │  tive claim│ │  ion user  │ │  prompt:    │  │
+   │  │            │ │  → verify  │ │  may rely  │ │  3-layer    │  │
+   │  │            │ │  bidirec-  │ │  on? →     │ │  wrapper    │  │
+   │  │            │ │  tionally  │ │  R1+R2+R3  │ │             │  │
+   │  └────────────┘ └────────────┘ └────────────┘ └────────────┘  │
+   │                                                                  │
+   │  Operated by: Hermes (xhigh reasoning)                           │
+   └──────────────────────────────────────────────────────────────────┘
                                     ▼
-                              Clarification
+                            hm context injection
+                            (session_search + memory)
                                     ▼
-   ╔══════════════════════════════════════════════════════════════════╗
-   ║  鏡門 Kyōmon · Mirror Gate                                        ║
-   ║  (鏡 = mirror — reflects truth, never distorts. 八咫鏡)            ║
-   ║                                                                  ║
-   ║  "Did I see what I think I saw, or a trick of the light?"        ║
-   ║                                                                  ║
-   ║  Comparative claim made?                                         ║
-   ║    ├─ Bidirectional grep verification                            ║
-   ║    ├─ [鏡門 ✓] evidence tag required                              ║
-   ║    ├─ 🛑 falsified → fix & re-verify                             ║
-   ║    └─ ✅ verified → pass through                                 ║
-   ║                                                                  ║
-   ║  Operated by: Hermes (premise verification)                      ║
-   ╚══════════════════════════════════════════════════════════════════╝
+   ┌──────────────────────────────────────────────────────────────────┐
+   │               Claude Code Workflow — Execution Engine             │
+   │                                                                  │
+   │  Phase 0: Agent manifest → Phase 1: 4-agent R1 →                 │
+   │  Phase 2: Auto-diff → Phase 3: Adversarial verification →        │
+   │  Phase 4: rx + cross-round audit → Phase 5: loop-until-dry →     │
+   │  Phase 6: KANSA audit                                            │
+   │                                                                  │
+   │  Per phase: hm synchronous veto (APPROVE/REJECT/ABORT/MODIFY)    │
+   └──────────────────────────────────────────────────────────────────┘
                                     ▼
-                            Verified Premises
-                                    ▼
-   ╔═════════════════════════════════════════════════════════════════╗
-   ║  證門 Shōmon · QUINTE Gate                                       ║
-   ║  (證 = testimony, evidence — witnesses speak, truth emerges)    ║
-   ║                                                                 ║
-   ║  Structured multi-agent debate                                  ║
-   ║                                                                 ║
-   ║  R1 · 4 agents analyze independently (hm+cc+cw+omp)             ║
-   ║  R2 · 5 agents cross-review (+rx) — never skipped               ║
-   ║  R3 · Hermes synthesizes verdict · ⚠️ advisory 鏡門 (drift)     ║
-   ║                                                                 ║
-   ║  R2 finds fatal flaw? → restart R1 (once)                       ║
-   ║  Consensus can hide shared blind spots · R2 is the only check   ║
-   ║                                                                 ║
-   ║  Operated by: Hermes + 5 agents (R1–R3)                         ║
-   ╚═════════════════════════════════════════════════════════════════╝
-                                    ▼
-                              Verification
-                                    ▼
-   ╔═════════════════════════════════════════════════════════════════╗
-   ║  閂門 Kan'nukimon · Anti-Drift Gate                              ║
-   ║  (閂 = bolt, latch — no witness collusion)                       ║
-   ║                                                                 ║
-   ║  "No witness collusion" — each prompt must be independent       ║
-   ║                                                                 ║
-   ║  Every prompt to external agents must use three-layer defense:   ║
-   ║    ① Task-first (task before context, not after)                ║
-   ║    ② ONLY Y, not NOT X — positive framing prevents collision    ║
-   ║    ③ TASK: restatement required — drift caught in first line    ║
-   ║                                                                 ║
-   ║  Drift detected? → kill & retry with shrunk prompt              ║
-   ║  Operated by: Hermes (prompt construction)                      ║
-   ╚═════════════════════════════════════════════════════════════════╝
-                                    ▼
-                                  Output
+                                  Verdict
 ```
 
 ## Structure
 
 | File | Content |
 |------|---------|
-| [GATES.md](GATES.md) | The Four Gates — 雨門·鏡門·證門·閂門 |
-| [CONCEPTS.md](CONCEPTS.md) | Core concepts — Rashomon Depth, YNI, Kurosawa Check, Kyōmon IR |
+| [GATES.md](GATES.md) | The Four Gates — 雨門·鏡門·證門·閂門 (v3.0: parallel, cc-backed) |
+| [CONCEPTS.md](CONCEPTS.md) | Core concepts — Rashomon Depth, YNI, Kurosawa Check, Orchestration-Oversight Separation, Cross-Model Adversarial Depth |
 | [PHENOMENOLOGY.md](PHENOMENOLOGY.md) | Phenomenological expansion (forthcoming) |
 
 ## Ecosystem
-
-RASHOMON is part of a four-repo framework for reliable AI agents:
 
 | Repo | Role | Question |
 |------|------|----------|
 | [RASHOMON](https://github.com/eric-stone-plus/RASHOMON) | Design philosophy | *Why* multi-perspective truth-seeking? |
 | [QUINTE](https://github.com/eric-stone-plus/QUINTE) | Debate protocol | *How* to orchestrate cross-examination? |
-| [KANSA](https://github.com/eric-stone-plus/KANSA) | Verdict audit | *Sound?* Does the R3 conclusion hold up? |
+| [KANSA](https://github.com/eric-stone-plus/KANSA) | Verdict audit | *Sound?* Does the conclusion hold up? |
 | [KENGEN](https://github.com/eric-stone-plus/KENGEN) | Authorization perimeter | *May I* execute this operation? |
 
-RASHOMON and QUINTE form the epistemology→methodology axis. KANSA audits R3 verdicts. KENGEN gates external actions with BANNIN (番人) as the active session-level guard. Each is necessary; none is sufficient alone.
+v3.0 repositions the ecosystem: RASHOMON supplies epistemology, QUINTE provides the cc Workflow execution protocol, KANSA audits verdict integrity, KENGEN gates external action. The orchestration-oversight separation is the architectural instantiation of RASHOMON's core insight: no single perspective — not even the orchestrator's — can be trusted to judge itself.
 
 ## Cultural Anchors
 
