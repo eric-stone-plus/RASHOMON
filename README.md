@@ -172,6 +172,67 @@ The v3.0 architecture separates these concerns:
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
+## The Four Gates · 四道門
+
+Four gates, four failure modes. Each gate is a mandatory checkpoint operated by hm in Phase -1, running in parallel (~5s). They are not ceremonial — each prevents a class of error that has been observed in production and caused by the previous architecture. The gates follow the woodcutter's journey in Kurosawa's *Rashomon*: arrive in rain at the gate, check your own eyes before you look at others, let the witnesses testify, then bolt the door so no one colludes.
+
+### 雨門 Amamon · Ambiguity Gate
+
+> *「雨が降っている。門の下で、樵夫は立ち止まる。」— "It is raining. Under the gate, the woodcutter stops."*
+
+The first gate, named for the rain (雨 *ame*) that opens the film — the uncertainty that shrouds every question before it is examined. Before any agent can analyze, before any debate can begin, someone must ask: **do I actually understand what is being asked?**
+
+This seems trivial. It is not. The most expensive mistake in multi-agent debate is running five agents through R1+R2+R3 only to discover everyone misunderstood the question. Amamon catches this at the source. When hm detects ambiguity in the user's question — vague intent, unclear scope, undefined reference — it must `clarify()` rather than guess. The cost of asking one clarification is approximately zero. The cost of a full QUINTE on a misunderstood question is five API calls, three rounds, and a wrong conclusion the user will rely on.
+
+**Failure mode**: Wrong question asked. **Trigger**: Ambiguous user input. **Action**: Clarify first, debate later. **Operator**: hm (xhigh reasoning).
+
+### 鏡門 Kyōmon · Mirror Gate
+
+> *「鏡は語らない。ただ映すだけだ。」— "The mirror does not speak. It only reflects."*
+
+The second gate is named for the sacred mirror (鏡 *kagami*), Yata no Kagami (八咫鏡) — the mirror that reflects truth without interpretation, without argument, without favor. Kyōmon addresses the most insidious error in the system: **hm's own comprehension mistakes.**
+
+hm has a documented tendency to make directional factual errors when comparing sources — claiming "local added X" when X existed in the remote, asserting "repo has the better Y" when local was the updated version. These errors propagate: a wrong premise in hm's R1 becomes a wrong basis for every other agent's analysis. Kyōmon intercepts this before the debate pipeline starts.
+
+Six rules govern the mirror: bidirectional grep verification on both sides of every comparison, evidence anchored to file:line positions, explicit directional arrows (LOCAL→REPO / REPO→LOCAL / SYMMETRIC), stated baseline assumptions, three-tier disposition (✅ pass / 🛑 falsified→block / ⚠️ uncertain→tag), and memory-claim labeling. The mechanical enforcement: every comparative statement must begin with `[鏡門 ✓]` followed by verification evidence.
+
+This gate was promoted from a sub-gate of Shōmon to an independent gate in 2026-06-08 after a QUINTE audit discovered that hm had made three directional errors in a single analysis. The reasoning: contamination must be intercepted *before* it enters the debate pipeline, not caught mid-stream.
+
+**Failure mode**: hm comprehension error — directional factual mistakes based on memory rather than source verification. **Trigger**: Any comparative claim by hm. **Action**: Bidirectional grep, evidence anchoring, three-tier disposition. **Operator**: hm (xhigh reasoning, self-auditing).
+
+### 證門 Shōmon · Testimony Gate
+
+> *「証人たちは門の中で語る。一人の証言を別の者が読み、その者が自分では見えなかったものを見つける。」— "The witnesses testify inside the gate. One reads another's account and finds what that witness could not see about themselves."*
+
+The third gate, 證 (*shō* = testimony, evidence), is the gate of witness confrontation. This is where the Rashomon problem meets its solution: no single perspective can be trusted, so we create a structure where perspectives must confront each other.
+
+v3.0 gives Shōmon a two-layer design. The **gate layer** (~1s, hm) makes a fast determination: is this question likely to produce a conclusion the user will rely on? If yes → authorize the full cc Workflow pipeline. If no (trivial file lookup, deterministic measurement, single-tool query with zero reasoning) → skip. The gate layer prevents wasting five agents on "where is this file" while ensuring nothing consequential slips through.
+
+The **execution layer** (30-180s, cc Workflow) is the full QUINTE pipeline: Phase 0 manifest generation, Phase 1 R1 four-agent parallel analysis, Phase 2 auto-diff claim extraction, Phase 3 R2 cross-model adversarial verification, Phase 4 rx pure reasoning cross-judgment, Phase 5 loop-until-dry convergence, Phase 6 KANSA audit. hm holds synchronous veto at every phase boundary — APPROVE, REJECT, ABORT, or MODIFY. The veto is blocking: cc cannot proceed without hm's approval. 15 seconds of silence triggers a PAUSE, never an auto-continue.
+
+The gate layer and execution layer were conflated in v2.x — Shōmon was described as both "the check" and "the pipeline itself." v3.0 separates them explicitly. The gate opens the door. The pipeline walks through it.
+
+**Failure mode**: Single-perspective bias. **Trigger**: Conclusion the user may rely on. **Action**: Gate layer → authorize. Execution layer → full R1+R2+R3 pipeline with hm per-phase veto. **Operator**: hm (gate) + cc Workflow (execution) + hm (supervision).
+
+### 閂門 Kan'nukimon · Bolt Gate
+
+> *「閂をかける。証人たちは互いに話してはならない。」— "Bolt the door. The witnesses must not speak to each other."*
+
+The fourth gate, 閂 (*kan'nuki* = bolt, latch), is the anti-collusion gate. Its function is to ensure that every external agent receives an independent, uncontaminated prompt — no witness sees another's testimony before producing their own.
+
+This gate exists because of a specific, repeatedly observed failure: agents share a concept namespace. When cc or cw see certain keywords in their prompt, their training-data associations activate — and the agent drifts from the assigned task to a tangentially related topic it "knows more about." This is not malicious. It is a fundamental property of LLM attention: strong concept associations in training data override explicit instructions.
+
+Kan'nukimon enforces a three-layer defense on every prompt to external agents:
+1. **Task-first**: the specific task (not context, not constraints) goes at the very beginning of the prompt — the agent's attention lands on the task before anything else
+2. **ONLY Y, not NOT X**: positive framing ("Your ONLY function: cross-review this file for claim consistency") replaces negative framing ("Do NOT inspect hermes-desktop") — negation creates the very association it tries to suppress
+3. **TASK: restatement**: every agent's first line of output must restate what it understands its task to be. Drift is caught in the first sentence, not discovered after 120 seconds of wasted computation.
+
+The gate takes its name from the bolt on the Rashōmon gate — once the witnesses are inside, they must not coordinate their stories. Each prompt is a sealed chamber. Each agent sees only what it needs to see.
+
+**Failure mode**: Prompt contamination — agents drift to training-data associations, producing irrelevant output. **Trigger**: Every prompt to external agents (cc, cw, omp, rx). **Action**: Three-layer wrapper on all prompts. **Operator**: hm (prompt construction).
+
+---
+
 ## Why cc? Three Mechanisms, Three Epistemologies
 
 Claude Code possesses three native mechanisms that Hermes cannot replicate. They are not "better tools" — they are a different category of capability:

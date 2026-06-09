@@ -152,4 +152,4 @@ Phase 6: KANSA 監査
 
 ---
 
-*GATES-v3.1.md — clarified Shōmon gate vs. pipeline distinction + parallel execution, 2026-06-09*
+*GATES-v3.0.md — Shōmon two-layer gate-vs-pipeline design + parallel execution, 2026-06-09*
