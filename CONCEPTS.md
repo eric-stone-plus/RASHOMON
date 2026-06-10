@@ -1,6 +1,6 @@
 # Core Concepts
 
-Operational concepts extracted from the Rashōmon metaphor for the QUINTE protocol. v3.0 additions: Orchestration-Oversight Separation, Three-Mechanism Epistemology, Cross-Model Adversarial Depth, Refined Brute Force.
+Operational concepts extracted from the Rashōmon metaphor for the QUINTE protocol. v3.1 additions: Orchestration-Oversight Separation, Three-Mechanism Epistemology, Cross-Model Adversarial Depth, Refined Brute Force.
 
 ---
 
@@ -17,7 +17,7 @@ Rashomon Depth = |{ genuinely different reasoning paths }|
 - Different models, different toolchains, different attention biases → Depth increases
 - R2 cross-review itself contributes Depth — reviewing another's analysis from a different position
 
-**v3.0 extension**: The cross-model requirement for adversarial verification (≥1 refuting agent from a different provider) is the engineering realization of Rashomon Depth. Same-model consensus = 1 verification × 3 noise samples. Cross-model consensus = genuinely independent verification paths.
+**v3.1 extension**: The cross-model requirement for adversarial verification (≥1 refuting agent from a different provider) is the engineering realization of Rashomon Depth. Same-model consensus = 1 verification × 3 noise samples. Cross-model consensus = genuinely independent verification paths.
 
 **Heuristic**: If all four R1 outputs are strikingly consistent and no one says "I'm not sure," this may be a shared blind spot, not consensus. In Rashōmon, if four witnesses tell exactly the same story, that is precisely when you should be suspicious.
 
@@ -25,7 +25,7 @@ Rashomon Depth = |{ genuinely different reasoning paths }|
 
 ## Orchestration-Oversight Separation
 
-**v3.0 core concept**: The entity that executes the debate must not be the same entity that judges its quality.
+**v3.1 core concept**: The entity that executes the debate must not be the same entity that judges its quality.
 
 ```
 Claude Code (Execution Domain)       Hermes (Oversight Domain)
@@ -77,7 +77,7 @@ YNI = 1 - (intersection of claims / union of claims)
 - YNI ≈ 0.3–0.5: Healthy divergence → R2 flags disputes.
 - YNI > 0.7: High dispersion → the original question may be ambiguous. Return to Amamon.
 
-**v3.0 revision**: YNI is now computed by Phase 2 auto-diff (claims comparison after JSON Schema alignment), not by hm manual estimation. Mechanical diff eliminates subjective bias in hm's dispute annotation.
+**v3.1 revision**: YNI is now computed by Phase 2 auto-diff (claims comparison after JSON Schema alignment), not by hm manual estimation. Mechanical diff eliminates subjective bias in hm's dispute annotation.
 
 ---
 
@@ -85,11 +85,11 @@ YNI = 1 - (intersection of claims / union of claims)
 
 **Definition**: R2 mandatory cross-review + adversarial verification. QUINTE's core mechanism.
 
-**Metaphor**: Kurosawa did not simply let four witnesses tell their stories. The power of *Rashōmon* lies in the audience comparing the testimonies and constructing an understanding closer to the truth through that act of comparison. R2 is this "comparison" step — with v3.0 adding adversarial refutation.
+**Metaphor**: Kurosawa did not simply let four witnesses tell their stories. The power of *Rashōmon* lies in the audience comparing the testimonies and constructing an understanding closer to the truth through that act of comparison. R2 is this "comparison" step — with v3.1 adding adversarial refutation.
 
-**v3.0 upgrade**:
+**v3.1 upgrade**:
 - v2.x: Cross-review = read others' output + flag disputes
-- v3.0: Cross-review = cross-review + adversarial verification (3 refuters per dispute, cross-model) + cross-round consistency review
+- v3.1: Cross-review = cross-review + adversarial verification (3 refuters per dispute, cross-model) + cross-round consistency review
 
 **Rule**: R2 is never skipped. Four-way consensus can still be a shared blind spot.
 
@@ -118,7 +118,7 @@ Unchanged in v3.0. Measures the frequency of hm directional errors and Kyōmon's
 | Term | 日本語 / English | Reading | Meaning |
 |------|-----------------|---------|---------|
 | Rashomon Depth | — | — | Number of independent perspectives |
-| Orchestration-Oversight Separation | — | — | v3.0 core architectural principle: execution ≠ judgment |
+| Orchestration-Oversight Separation | — | — | v3.1 core architectural principle: execution ≠ judgment |
 | Three-Mechanism Epistemology | — | — | Agent/Workflow/Bash differentiated epistemological contributions |
 | Cross-Model Adversarial Depth | — | — | Independent perspectives from cross-model adversarial verification |
 | Refined Brute Force | 精煉暴力 | — | Canonical architecture label: governed brute-force ensembling |

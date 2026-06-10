@@ -1,8 +1,8 @@
 # 四道门 — The Four Gates (v3.1)
 
-QUINTE v3.0's four mandatory gates. **Parallel execution (~5s), hm-operated.** Shōmon gate layer makes a rapid "does this need QUINTE?" determination; if passed, cc Workflow executes the full pipeline.
+QUINTE v3.1's four mandatory gates. **Parallel execution (~5s), hm-operated.** Shōmon gate layer makes a rapid "does this need QUINTE?" determination; if passed, cc Workflow executes the full pipeline.
 
-v3.0 change: gates changed from serial to parallel. Shōmon (formerly hm manually dispatching R1+R2+R3) now has two layers: ① Shōmon gate — hm rapid judgment "consequential output? → enter cc pipeline" (~1s); ② Shōmon execution — cc Workflow full R1→R2→R3→loop-until-dry→KANSA pipeline, hm per-Phase synchronous veto.
+v3.1 change: gates changed from serial to parallel. Shōmon (formerly hm manually dispatching R1+R2+R3) now has two layers: ① Shōmon gate — hm rapid judgment "consequential output? → enter cc pipeline" (~1s); ② Shōmon execution — cc Workflow full R1→R2→R3→loop-until-dry→KANSA pipeline, hm per-Phase synchronous veto.
 
 ---
 
@@ -18,7 +18,7 @@ v3.0 change: gates changed from serial to parallel. Shōmon (formerly hm manuall
 
 **Design rationale**: Spending 30 minutes running a full QUINTE only to discover everyone misunderstood the question is far more expensive than asking one clarifying question.
 
-**v3.0 operator**: hm (xhigh reasoning), executed in parallel in Phase -1.
+**v3.1 operator**: hm (xhigh reasoning), executed in parallel in Phase -1.
 
 **Naming**: 雨 (あめ / ame) = rain. The film opens in heavy rain at the Rashōmon gate. Amamon is the entry point — if the question is unclear, do not enter.
 
@@ -42,7 +42,7 @@ v3.0 change: gates changed from serial to parallel. Shōmon (formerly hm manuall
 
 **Mechanical enforcement**: Every comparative statement must begin with `[鏡門 ✓]` followed by verification evidence.
 
-**v3.0 operator**: hm (xhigh reasoning), executed in parallel in Phase -1.
+**v3.1 operator**: hm (xhigh reasoning), executed in parallel in Phase -1.
 
 **Naming**: 鏡 (かがみ / kagami) = mirror. Yata no Kagami (八咫鏡), the sacred mirror that reflects truth without interpretation.
 
@@ -52,7 +52,7 @@ v3.0 change: gates changed from serial to parallel. Shōmon (formerly hm manuall
 
 **Rashōmon metaphor**: Witnesses testify inside the gate. Truth emerges when one witness, reviewing *another's* account, spots what that witness could not see about themselves.
 
-**v3.0 two-layer design**:
+**v3.1 two-layer design**:
 
 ```
 Shōmon = gate layer (hm, ~1s) + execution layer (cc Workflow, 30-180s)
@@ -81,7 +81,7 @@ Phase 6: KANSA audit (監査)
 Each Phase: hm synchronous veto (APPROVE/REJECT/ABORT/MODIFY)
 ```
 
-**v3.0 operator**: hm (gate judgment) → cc Workflow (execution engine) + hm (synchronous veto oversight).
+**v3.1 operator**: hm (gate judgment) → cc Workflow (execution engine) + hm (synchronous veto oversight).
 
 **Naming**: 證 (しょう / shō) = testimony, evidence. Shōmon is the complete gate + confrontation mechanism.
 
@@ -100,13 +100,13 @@ Each Phase: hm synchronous veto (APPROVE/REJECT/ABORT/MODIFY)
 2. **Semantic isolation**: "ONLY Y" replaces "NOT X" — build a positive identity rather than suppressing a negative one
 3. **Forced first-line restatement**: Require `TASK: [restatement]` — drift is caught in the first sentence, not after 120 seconds of wasted computation
 
-**v3.0 operator**: hm (audits prompt wrapping during Phase -1 parallel execution) + cc (auto-applies three-layer wrapping during Workflow agent dispatch).
+**v3.1 operator**: hm (audits prompt wrapping during Phase -1 parallel execution) + cc (auto-applies three-layer wrapping during Workflow agent dispatch).
 
 **Naming**: 閂 (かんぬき / kan'nuki) = bolt, latch.
 
 ---
 
-## Execution Flow (v3.0)
+## Execution Flow (v3.1)
 
 ```
 User Question

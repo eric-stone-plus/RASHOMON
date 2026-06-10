@@ -4,11 +4,11 @@
 
 ## The Gaze and the Blind Spot
 
-Every observer-position creates its own zone of invisibility. The orchestrator cannot see what its orchestration excludes; the overseer cannot see what its oversight framework renders invisible. v3.0's separation of cc (execution) from hm (oversight) does not eliminate blind spots — it distributes them across two entities with different blindness patterns, making cross-detection possible.
+Every observer-position creates its own zone of invisibility. The orchestrator cannot see what its orchestration excludes; the overseer cannot see what its oversight framework renders invisible. v3.1's separation of cc (execution) from hm (oversight) does not eliminate blind spots — it distributes them across two entities with different blindness patterns, making cross-detection possible.
 
 ## Testimony Without Ground Truth
 
-When cross-examination is the only available epistemology, the question shifts from "which witness is correct?" to "what structure makes witness errors visible to other witnesses?" v3.0's adversarial verification (cross-model refuters) and loop-until-dry convergence are not truth-finding mechanisms — they are error-surfacing mechanisms. Truth remains asymptotic.
+When cross-examination is the only available epistemology, the question shifts from "which witness is correct?" to "what structure makes witness errors visible to other witnesses?" v3.1's adversarial verification (cross-model refuters) and loop-until-dry convergence are not truth-finding mechanisms — they are error-surfacing mechanisms. Truth remains asymptotic.
 
 ## The Orchestrator's Paradox
 
@@ -30,7 +30,7 @@ Fallibilism is the operating condition of structured debate. loop-until-dry does
 
 ## Beyond Kurosawa
 
-Kurosawa gave us four witnesses and a skeptical frame. QUINTE v3.0 gives us five agents, three mechanisms, one orchestrator, one overseer. The woodcutter is no longer a person — it is the structure itself. The question is no longer "who is telling the truth?" but "does our structure make lies visible?"
+Kurosawa gave us four witnesses and a skeptical frame. QUINTE v3.1 gives us five agents, three mechanisms, one orchestrator, one overseer. The woodcutter is no longer a person — it is the structure itself. The question is no longer "who is telling the truth?" but "does our structure make lies visible?"
 
 ---
 

@@ -10,11 +10,11 @@ QUINTE v3.1 (2026-06-10) introduced a fundamental architectural insight: **the e
 
 In v2.x, Hermes was both orchestrator (deciding who speaks, in what order, on what topic) and participant (producing analysis). This created an intrinsic conflict of interest: the orchestrator could unconsciously trim the debate to fit its own analytical conclusions — skipping agents it deemed "unnecessary," narrowing scope based on its own blind spots, treating its own R1 conclusions as ground truth for R2 synthesis. This was observed in production: hm dispatched only omp, omitting cc and cw (2026-06-07, twice). hm selected files from memory rather than enumerating complete manifests. hm declared "no other issues" on incomplete coverage. These were not discipline failures — they were structural consequences of conflating execution with oversight.
 
-The v3.0 architecture separates these concerns:
+The v3.1 architecture separates these concerns:
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                        RASHOMON v3.0 — Architecture                          │
+│                        RASHOMON v3.1 — Architecture                          │
 │                                                                             │
 │  ┌───────────────────────────────────────────────────────────────────────┐ │
 │  │                    EXECUTION DOMAIN (Claude Code)                      │ │
@@ -49,7 +49,7 @@ The v3.0 architecture separates these concerns:
 │  │  └──────────────────────────────────────────────────────────────┘    │ │
 │  │                                                                       │ │
 │  │  ┌──────────────────────────────────────────────────────────────┐    │ │
-│  │  │  GOVERNANCE LAYER (v3.0)                                      │    │ │
+│  │  │  GOVERNANCE LAYER (v3.1)                                      │    │ │
 │  │  │  · Cost Circuit Breaker:  claims≤100, refutations≤50, loop≤5  │    │ │
 │  │  │  · Poison Detection:      agent>50 claims→anomaly→KANSA check │    │ │
 │  │  │  · State Persistence:     structured logs→~/.hermes/quinte/   │    │ │
@@ -222,11 +222,11 @@ This gate was promoted from a sub-gate of Shōmon to an independent gate in 2026
 
 The third gate, 證 (*shō* = testimony, evidence), is the gate of witness confrontation. This is where the Rashomon problem meets its solution: no single perspective can be trusted, so we create a structure where perspectives must confront each other.
 
-v3.0 gives Shōmon a two-layer design. The **gate layer** (~1s, hm) makes a fast determination: is this question likely to produce a conclusion the user will rely on? If yes → authorize the full cc Workflow pipeline. If no (trivial file lookup, deterministic measurement, single-tool query with zero reasoning) → skip. The gate layer prevents wasting five agents on "where is this file" while ensuring nothing consequential slips through.
+v3.1 gives Shōmon a two-layer design. The **gate layer** (~1s, hm) makes a fast determination: is this question likely to produce a conclusion the user will rely on? If yes → authorize the full cc Workflow pipeline. If no (trivial file lookup, deterministic measurement, single-tool query with zero reasoning) → skip. The gate layer prevents wasting five agents on "where is this file" while ensuring nothing consequential slips through.
 
 The **execution layer** (30-180s, cc Workflow) is the full QUINTE pipeline: Phase 0 manifest generation, Phase 1 R1 four-agent parallel analysis, Phase 2 auto-diff claim extraction, Phase 3 R2 cross-model adversarial verification, Phase 4 rx pure reasoning cross-judgment, Phase 5 loop-until-dry convergence, Phase 6 KANSA audit. hm holds synchronous veto at every phase boundary — APPROVE, REJECT, ABORT, or MODIFY. The veto is blocking: cc cannot proceed without hm's approval. 15 seconds of silence triggers a PAUSE, never an auto-continue.
 
-The gate layer and execution layer were conflated in v2.x — Shōmon was described as both "the check" and "the pipeline itself." v3.0 separates them explicitly. The gate opens the door. The pipeline walks through it.
+The gate layer and execution layer were conflated in v2.x — Shōmon was described as both "the check" and "the pipeline itself." v3.1 separates them explicitly. The gate opens the door. The pipeline walks through it.
 
 **Failure mode**: Single-perspective bias. **Trigger**: Conclusion the user may rely on. **Action**: Gate layer → authorize. Execution layer → full R1+R2+R3 pipeline with hm per-phase veto. **Operator**: hm (gate) + cc Workflow (execution) + hm (supervision).
 
@@ -259,7 +259,7 @@ Claude Code possesses three native mechanisms that Hermes cannot replicate. They
 | **Workflow** (orchestration engine) | Structural guarantees: pipeline cannot skip, schema cannot overlook | Manual dispatch omission, output format ambiguity, false convergence |
 | **Bash** (external agents) | Toolchain diversity → decorrelated blind spots across hm/cw/rx/omp | Single-toolchain shared blindness |
 
-**Structural vs Disciplinary Guarantees.** v2.x relied on hm's discipline — "never skip an agent," "always enumerate all files," "never self-judge simplicity." These were repeatedly violated not because hm was careless but because the role of orchestrator-as-participant made them structurally unenforceable. v3.0 replaces disciplinary rules with structural guarantees: `pipeline()` cannot skip an item; `agent({schema})` cannot produce an unparseable claim; `parallel()` cannot accidentally serialize.
+**Structural vs Disciplinary Guarantees.** v2.x relied on hm's discipline — "never skip an agent," "always enumerate all files," "never self-judge simplicity." These were repeatedly violated not because hm was careless but because the role of orchestrator-as-participant made them structurally unenforceable. v3.1 replaces disciplinary rules with structural guarantees: `pipeline()` cannot skip an item; `agent({schema})` cannot produce an unparseable claim; `parallel()` cannot accidentally serialize.
 
 ## Why hm Retains Veto Power
 
@@ -278,9 +278,9 @@ This is the exact problem facing single-agent AI systems. One model, one perspec
 
 The deeper property — the one that makes RASHOMON a paradigm, not just a voting scheme — is **cross-detection**: an agent reviewing *another's* output in R2 can spot errors it could never have caught in its own R1. Self-review is epistemologically closed — you cannot see the blind spot you are standing in. Cross-review breaks that closure. The value is not "majority wins" — it is that the error an agent cannot self-detect is precisely the error another agent's position allows it to see.
 
-### v3.0 Extension: Cross-Model Adversarial Depth
+### v3.1 Extension: Cross-Model Adversarial Depth
 
-v2.x treated all four witnesses as epistemologically equivalent — four DeepSeek instances with different system prompts. v3.0 recognizes that **same-model consensus is weaker than cross-model consensus.** Three DeepSeek instances agreeing gives you 1 verification with 3 samples of the same noise distribution. Cross-model adversarial verification (≥1 refuter from different provider in Phase 3) decorrelates errors across architectures, training data, and RLHF alignment — producing genuinely independent verification rather than same-model echo.
+v2.x treated all four witnesses as epistemologically equivalent — four DeepSeek instances with different system prompts. v3.1 recognizes that **same-model consensus is weaker than cross-model consensus.** Three DeepSeek instances agreeing gives you 1 verification with 3 samples of the same noise distribution. Cross-model adversarial verification (≥1 refuter from different provider in Phase 3) decorrelates errors across architectures, training data, and RLHF alignment — producing genuinely independent verification rather than same-model echo.
 
 ## The Cost Question: "Is This Just Brute Force?"
 
@@ -290,17 +290,17 @@ loop-until-dry + adversarial verification per dispute + 5 agents per round can s
 
 The answer has two layers:
 
-**Layer 1 — Yes, it is brute force, and that is the point.** DeepSeek API pricing (~$0.14/M input, ~$0.28/M output tokens) makes a full 5-agent debate cost approximately $0.01–0.05. At that price, the marginal cost of another round of cross-verification is negligible relative to the cost of an undetected error. v3.0's cost circuit breaker (claims≤100, refutations≤50, loops≤5) bounds the worst case to approximately $1–3 per debate — cheaper than 5 minutes of human review.
+**Layer 1 — Yes, it is brute force, and that is the point.** DeepSeek API pricing (~$0.14/M input, ~$0.28/M output tokens) makes a full 5-agent debate cost approximately $0.01–0.05. At that price, the marginal cost of another round of cross-verification is negligible relative to the cost of an undetected error. v3.1's cost circuit breaker (claims≤100, refutations≤50, loops≤5) bounds the worst case to approximately $1–3 per debate — cheaper than 5 minutes of human review.
 
 **Layer 2 — But brute force without structure is just expensive noise.** loop-until-dry with dual-condition termination (not just "keep going") and escalate-to-human (not auto-accept) ensures the brute force has a stopping criterion. Cross-model adversarial verification ensures the brute force isn't just same-model echo. The governance layer ensures the brute force doesn't run away.
 
-The philosophical position: **epistemic certainty is expensive. v3.0 makes it cheap enough to be default-on, with structural guards against runaway cost.** If DeepSeek were $15/M tokens instead of $0.15, the architecture would be different. The economics enable the epistemology.
+The philosophical position: **epistemic certainty is expensive. v3.1 makes it cheap enough to be default-on, with structural guards against runaway cost.** If DeepSeek were $15/M tokens instead of $0.15, the architecture would be different. The economics enable the epistemology.
 
 ## Structure
 
 | File | Content |
 |------|---------|
-| [GATES.md](GATES.md) | The Four Gates — 雨門·鏡門·證門·閂門 (v3.0: parallel, cc-backed) |
+| [GATES.md](GATES.md) | The Four Gates — 雨門·鏡門·證門·閂門 (v3.1: parallel, cc-backed) |
 | [CONCEPTS.md](CONCEPTS.md) | Core concepts — Orchestration-Oversight Separation, Rashomon Depth, YNI, Refined Brute Force |
 | [PHENOMENOLOGY.md](PHENOMENOLOGY.md) | Phenomenology of the orchestrated gaze — the philosophical dimensions |
 | [references/mathematical-foundations.md](references/mathematical-foundations.md) | Mathematical foundations — Model Multiplicity, Partial Order Consensus, Rashomon Ratio |
