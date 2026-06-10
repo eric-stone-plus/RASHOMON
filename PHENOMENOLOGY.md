@@ -1,6 +1,6 @@
 # Phenomenology of the Orchestrated Gaze
 
-> v3.0 (2026-06-09): Reframed around the Orchestration-Oversight Separation — the phenomenological implications of letting the machine execute while another machine watches.
+> v3.1 (2026-06-10): Reframed around the Orchestration-Oversight Separation — the phenomenological implications of letting the machine execute while another machine watches.
 
 ## The Gaze and the Blind Spot
 
@@ -34,4 +34,4 @@ Kurosawa gave us four witnesses and a skeptical frame. QUINTE v3.0 gives us five
 
 ---
 
-*PHENOMENOLOGY-v3.md — cc-centric epistemological framework, 2026-06-09*
+*PHENOMENOLOGY-v3.1.md — cc-centric epistemological framework, 2026-06-09, updated 2026-06-10*

@@ -4,9 +4,9 @@
 
 **RASHOMON** is the philosophical foundation of the QUINTE debate protocol. It asks the question QUINTE is built to answer: *when a single perspective cannot be trusted, how do we converge on actionable truth?*
 
-## v3.0: The Orchestration-Oversight Separation
+## RASHOMON v3.1: The Orchestration-Oversight Separation
 
-QUINTE v3.0 (2026-06-09) introduced a fundamental architectural insight: **the entity that executes the debate should not be the same entity that judges its quality.** This is not a technical preference — it is an epistemological necessity born from observed failure.
+QUINTE v3.1 (2026-06-10) introduced a fundamental architectural insight: **the entity that executes the debate should not be the same entity that judges its quality.** This is not a technical preference — it is an epistemological necessity born from observed failure.
 
 In v2.x, Hermes was both orchestrator (deciding who speaks, in what order, on what topic) and participant (producing analysis). This created an intrinsic conflict of interest: the orchestrator could unconsciously trim the debate to fit its own analytical conclusions — skipping agents it deemed "unnecessary," narrowing scope based on its own blind spots, treating its own R1 conclusions as ground truth for R2 synthesis. This was observed in production: hm dispatched only omp, omitting cc and cw (2026-06-07, twice). hm selected files from memory rather than enumerating complete manifests. hm declared "no other issues" on incomplete coverage. These were not discipline failures — they were structural consequences of conflating execution with oversight.
 

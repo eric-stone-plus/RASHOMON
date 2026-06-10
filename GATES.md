@@ -1,4 +1,4 @@
-# The Four Gates — v3.0
+# 四道门 — The Four Gates (v3.1)
 
 QUINTE v3.0's four mandatory gates. **Parallel execution (~5s), hm-operated.** Shōmon gate layer makes a rapid "does this need QUINTE?" determination; if passed, cc Workflow executes the full pipeline.
 
@@ -152,4 +152,4 @@ User Question
 
 ---
 
-*GATES-v3.0.md — Shōmon two-layer gate-vs-pipeline design + parallel execution, 2026-06-09*
+*GATES-v3.1.md — Shōmon two-layer gate-vs-pipeline design + parallel execution, 2026-06-09, updated 2026-06-10*

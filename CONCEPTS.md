@@ -132,4 +132,4 @@ Unchanged in v3.0. Measures the frequency of hm directional errors and Kyōmon's
 
 ---
 
-*CONCEPTS-v3.md — ratified 2026-06-09, updated 2026-06-10*
+*CONCEPTS-v3.1.md — ratified 2026-06-09, updated 2026-06-10*
