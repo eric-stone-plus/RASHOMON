@@ -1,6 +1,6 @@
 # RASHOMON (羅生門)
 
-> 芥川龍之介《藪の中》（1922）→ 黒澤明《羅生門》（1950）→ Claude Code orchestrated truth-seeking
+> 芥川龍之介《藪の中》（1922）→ 黒澤明《羅生門》（1950）→ multi-agent orchestrated truth-seeking
 
 **RASHOMON** is the philosophical foundation of the QUINTE debate protocol. It asks the question QUINTE is built to answer: *when a single perspective cannot be trusted, how do we converge on actionable truth?*
 
@@ -10,7 +10,9 @@ QUINTE v3.1 (2026-06-10) introduced a fundamental architectural insight: **the e
 
 In v2.x, Hermes was both orchestrator (deciding who speaks, in what order, on what topic) and participant (producing analysis). This created an intrinsic conflict of interest: the orchestrator could unconsciously trim the debate to fit its own analytical conclusions — skipping agents it deemed "unnecessary," narrowing scope based on its own blind spots, treating its own R1 conclusions as ground truth for R2 synthesis. This was observed in production: hm dispatched only omp, omitting cc and cw (2026-06-07, twice). hm selected files from memory rather than enumerating complete manifests. hm declared "no other issues" on incomplete coverage. These were not discipline failures — they were structural consequences of conflating execution with oversight.
 
-The v3.1 architecture separates these concerns:
+The v3.1 architecture (simplified from v3.0) separates these concerns:
+
+> ⚠️ The diagram below illustrates the full v3.0 design for historical reference. v3.1 simplifies this by removing the three-mechanism epistemology, cross-round consistency Agent, and auto-diff JSON Schema from the protocol specification. The core insight — Orchestration-Oversight Separation — remains unchanged.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -314,7 +316,18 @@ The philosophical position: **epistemic certainty is expensive. v3.1 makes it ch
 | [KANSA](https://github.com/eric-stone-plus/KANSA) | Verdict audit | *Sound?* Does the conclusion hold up? |
 | [KENGEN](https://github.com/eric-stone-plus/KENGEN) | Authorization perimeter | *May I* execute this operation? |
 
-RASHOMON and QUINTE form the epistemology→methodology axis. KANSA audits verdict integrity. KENGEN gates external actions with BANNIN (番人) as the active session-level guard.
+## Relationship
+
+```
+RASHOMON (why) ──→ QUINTE (how) ──→ conclusions
+     │                                    │
+     ├── KANSA (sound?) ── R3 audit ──────┤
+     └── KENGEN (may?) ── authorization ──┘
+              │
+              └── BANNIN (guard) — session-level enforcement
+```
+
+RASHOMON and QUINTE form the epistemology→methodology axis. KANSA audits verdict integrity. KENGEN gates external actions with BANNIN as the active session-level guard.
 
 ## Cultural Anchors
 
