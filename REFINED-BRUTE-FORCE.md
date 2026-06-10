@@ -1,4 +1,4 @@
-# Refined Brute Force (精煉暴力 · 力任せ精錬)
+# Refined Brute Force (力任せ精錬)
 
 > *«При достаточной тяге и кирпич полетит — но с хвостовым оперением и автопилотом.»*
 > "With enough thrust, even a brick flies — but this one has fins and a flight computer."
@@ -9,7 +9,7 @@
 
 ## Origin
 
-Coined by **omp** (R1, 2026-06-09 meta-QUINTE) during the [力大砖飛 debate](https://github.com/eric-stone-plus/QUINTE/blob/main/debates/2026-06-09-brute-force/). The user proposed QUINTE was brute-force aesthetics — Soviet aviation style: compensate for lack of refinement with raw power. Five agents debated whether QUINTE is truly brute force or something more nuanced.
+Coined by **omp** (R1, 2026-06-09 meta-QUINTE) during the [*«при достаточной тяге и кирпич полетит»* debate](https://github.com/eric-stone-plus/QUINTE/blob/main/debates/2026-06-09-brute-force/). The user proposed QUINTE was brute-force aesthetics — Soviet aviation style: compensate for lack of refinement with raw power. Five agents debated whether QUINTE is truly brute force or something more nuanced.
 
 omp's three-tier verdict (core = brute, governance = refined, deployment = brute) produced the synthesis label: **Refined Brute Force**.
 
@@ -51,7 +51,6 @@ The protocol was designed for multi-model deployment. Current same-model impleme
 
 | Language | Phrase | Context |
 |----------|--------|---------|
-| CN | 力大砖飞 (lì dà zhuān fēi) | "So much power, even a brick flies" |
 | RU | При достаточной тяге и кирпич полетит | Soviet aviation proverb — MiG-25: massive engines, stainless steel airframe |
 | EN | A triumph of thrust over aerodynamics | F-4 Phantom II epitaph |
 | JA | 力任せ (ちからまかせ) | Relying on brute strength; forcing through with power |
