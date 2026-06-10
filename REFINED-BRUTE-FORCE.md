@@ -1,4 +1,4 @@
-# Refined Brute Force (力任せ精錬)
+# Refined Brute Force (精煉暴力)
 
 > *«При достаточной тяге и кирпич полетит — но с хвостовым оперением и автопилотом.»*
 > "With enough thrust, even a brick flies — but this one has fins and a flight computer."
@@ -26,7 +26,7 @@ Refined Brute Force = brute-force computation core + structural governance + rol
 - Cross-detection uses *more compute* to surface blind spots — not smarter algorithms
 
 **What is refined about QUINTE**:
-- Four Gates (四道門, shidōmon): targeted failure-mode defense, not "run more checks"
+- Four Gates: targeted failure-mode defense, not "run more checks"
   - 雨門 (Amamon): ambiguity detection → clarify back
   - 鏡門 (Kyōmon): bidirectional grep + evidence anchoring + directional explicitness
   - 證門 (Shōmon): cross-examination topology with recusal rules

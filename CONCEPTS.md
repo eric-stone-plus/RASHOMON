@@ -1,4 +1,4 @@
-# Core Concepts — 核心概念
+# Core Concepts
 
 Operational concepts extracted from the Rashōmon metaphor for the QUINTE protocol. v3.0 additions: Orchestration-Oversight Separation, Three-Mechanism Epistemology, Cross-Model Adversarial Depth, Refined Brute Force.
 
@@ -81,7 +81,7 @@ YNI = 1 - (intersection of claims / union of claims)
 
 ---
 
-## Kurosawa Check (黒澤明檢查)
+## Kurosawa Check
 
 **Definition**: R2 mandatory cross-review + adversarial verification. QUINTE's core mechanism.
 
@@ -95,7 +95,7 @@ YNI = 1 - (intersection of claims / union of claims)
 
 ---
 
-## Kyōmon Interception Rate (鏡門拦截率)
+## Kyōmon Interception Rate
 
 ```
 Kyōmon IR = errors_caught / comparative_claims_made
@@ -105,7 +105,7 @@ Unchanged in v3.0. Measures the frequency of hm directional errors and Kyōmon's
 
 ---
 
-## Refined Brute Force (精煉暴力 · 力任せ精錬)
+## Refined Brute Force (精煉暴力)
 
 > *«При достаточной тяге и кирпич полетит — но с хвостовым оперением и автопилотом.»*
 
