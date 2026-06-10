@@ -268,7 +268,7 @@ v2.x treated all four witnesses as epistemologically equivalent — four DeepSee
 
 ## The Cost Question: "Is This Just Brute Force?"
 
-loop-until-dry + adversarial verification per dispute + 5 agents per round can scale to hundreds of API calls per debate. Is this "力大砖飞" (brute force)?
+loop-until-dry + adversarial verification per dispute + 5 agents per round can scale to hundreds of API calls per debate. Is this *«при достаточной тяге и кирпич полетит»* — brute force?
 
 The answer has two layers:
 
