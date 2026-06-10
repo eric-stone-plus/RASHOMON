@@ -117,56 +117,56 @@ The v3.0 architecture separates these concerns:
 │  │      │                                                                │ │
 │  │      ▼                                                                │ │
 │  │  ┌──────────────────────┐                                             │ │
-│  │  │ Phase -1: hm 四道門  │ ← hm parallel (~5s)                        │ │
+│  │  │ Phase -1: hm Four Gates│ ← hm parallel (~5s)                        │ │
 │  │  │ 雨門+鏡門+證門+閂門  │                                             │ │
 │  │  │ → hm context inject  │                                             │ │
 │  │  └──────────┬───────────┘                                             │ │
 │  │             ▼                                                         │ │
 │  │  ┌──────────────────────┐                                             │ │
 │  │  │ Phase 0: Manifest    │ ← Agent(registry) → participant list       │ │
-│  │  │ cc只能加不能减 → hm签核│                                             │ │
+│  │  │ cc add-only → hm sign│                                             │ │
 │  │  └──────────┬───────────┘                                             │ │
 │  │             ▼                                                         │ │
 │  │  ┌──────────────────────┐                                             │ │
-│  │  │ Phase 1: R1 四方并行 │ ← cc parallel{cc,cw,omp,hm}                │ │
-│  │  │ JSON(宽松schema)     │   TASK:首行锚定                             │ │
-│  │  │ → hm 同步签核        │                                             │ │
+│  │  │ Phase 1: R1 4-Agent  │ ← cc parallel{cc,cw,omp,hm}                │ │
+│  │  │ JSON (loose schema)  │   TASK: first-line anchor                   │ │
+│  │  │ → hm sync sign-off   │                                             │ │
 │  │  └──────────┬───────────┘                                             │ │
 │  │             ▼                                                         │ │
 │  │  ┌──────────────────────┐                                             │ │
 │  │  │ Phase 2: Auto-Diff   │ ← JSON Schema claim diff                   │ │
-│  │  │ 相同→共识池 不同→分歧池│   新增类别→Schema扩展提案                    │ │
-│  │  │ → hm 签核            │                                             │ │
+│  │  │ same→consensus pool  │   diff→dispute pool                         │ │
+│  │  │ new→schema extension │   → hm sign-off                             │ │
 │  │  └──────────┬───────────┘                                             │ │
 │  │             ▼                                                         │ │
 │  │  ┌──────────────────────┐                                             │ │
-│  │  │ Phase 3: R2 对抗验证 │ ← per-dispute 3 refuters(跨模型≥1)          │ │
-│  │  │ ≥2/3 refute→废弃     │   1/3→contested保留                         │ │
-│  │  │ → hm 签核(防误杀)    │                                             │ │
+│  │  │ Phase 3: R2 Adversarial│ ← per-dispute 3 refuters (≥1 cross-model)   │ │
+│  │  │ ≥2/3 refute→drop     │   1/3→contested keep                        │ │
+│  │  │ → hm sign-off (anti-false-positive)│                                             │ │
 │  │  └──────────┬───────────┘                                             │ │
 │  │             ▼                                                         │ │
 │  │  ┌──────────────────────┐                                             │ │
-│  │  │ Phase 4: rx裁判      │ ← 结构化claims JSON输入(不读文件)            │ │
-│  │  │ + 跨轮一致性Agent     │   R1→R2→R3 drift detection                 │ │
-│  │  │ → hm 签核            │                                             │ │
+│  │  │ Phase 4: rx Cross-Judge│ ← structured claims JSON (read-only)        │ │
+│  │  │ + Cross-Round Agent  │   R1→R2→R3 drift detection                 │ │
+│  │  │ → hm sign-off        │                                             │ │
 │  │  └──────────┬───────────┘                                             │ │
 │  │             ▼                                                         │ │
 │  │  ┌──────────────────────┐                                             │ │
-│  │  │ Phase 5: loop-until  │ ← 双critic(不同配置) 双条件终止              │ │
-│  │  │ -dry 收敛检测        │   ①2轮无新 ②分歧↓+重复度>90%                 │ │
-│  │  │ dry→escalate人工     │   代码claims→Bash runtime验证               │ │
-│  │  │ → hm 签核            │                                             │ │
+│  │  │ Phase 5: loop-until  │ ← dual critic (diff config)                │ │
+│  │  │ -dry Convergence     │   ①2 rounds no new ②div↓+repeat>90%          │ │
+│  │  │ dry→escalate human   │   code claims→Bash runtime verify            │ │
+│  │  │ → hm sign-off        │                                             │ │
 │  │  └──────────┬───────────┘                                             │ │
 │  │             ▼                                                         │ │
 │  │  ┌──────────────────────┐                                             │ │
-│  │  │ Phase 6: KANSA 監査  │ ← KANSA persona + poison detect             │ │
-│  │  │ 议题轮换审计+越权标注 │   低质量claims→降权                          │ │
-│  │  │ → hm 终裁签核        │                                             │ │
+│  │  │ Phase 6: KANSA Audit │ ← KANSA persona + poison detect             │ │
+│  │  │ rotating auditor     │   overreach tagging                          │ │
+│  │  │ low-quality→downgrade│   → hm final sign-off                        │ │
 │  │  └──────────┬───────────┘                                             │ │
 │  │             ▼                                                         │ │
 │  │  ┌──────────────────────┐                                             │ │
-│  │  │ hm 閂門: 终裁展示    │ ← structured log → ~/.hermes/quinte/        │ │
-│  │  │ + push gate          │   可回放审计                                 │ │
+│  │  │ hm Kan'nukimon: Final│ ← structured log → ~/.hermes/quinte/        │ │
+│  │  │ + push gate          │   replay-auditable                           │ │
 │  │  └──────────────────────┘                                             │ │
 │  └───────────────────────────────────────────────────────────────────────┘ │
 └─────────────────────────────────────────────────────────────────────────────┘

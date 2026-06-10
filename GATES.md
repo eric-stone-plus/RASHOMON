@@ -1,154 +1,154 @@
-# 四道门 — The Four Gates (v3.0)
+# The Four Gates · 四道門 (v3.0)
 
-QUINTE v3.0 的四道强制门。**并行执行（~5s），hm 操作。證門是快速判断"是否需要 QUINTE"的闸门，通过后由 cc Workflow 执行完整 pipeline。**
+QUINTE v3.0's four mandatory gates. **Parallel execution (~5s), hm-operated.** Shōmon gate layer makes a rapid "does this need QUINTE?" determination; if passed, cc Workflow executes the full pipeline.
 
-v3.0 变更: 四门从串行改为并行。證門（原由 hm 手动调度 R1+R2+R3）现在拆分为两层：① 證門闸门 — hm 快速判断"结论性输出？→ 进入 cc pipeline"（~1s）；② 證門执行 — cc Workflow 完整 R1→R2→R3→loop-until-dry→KANSA pipeline，hm 每 Phase 同步否决。
-
----
-
-## 门 1：雨門 Amamon · Ambiguity Gate
-
-**罗生门隐喻**: 樵夫在雨中走进罗生门——进入之前，先确认你到底要审什么。
-
-**失败模式**: 问错问题（wrong question asked）
-
-**触发**: 用户问题模糊不清——不确定意图、范围、具体指哪个。
-
-**动作**: 必须先 `clarify` 反问确认，再行动。
-
-**设计理由**: 与其花半小时跑完 QUINTE 发现理解错了，不如多问一句。
-
-**v3.0 操作者**: hm (xhigh reasoning)，在 Phase -1 并行执行
-
-**命名**: 雨（あめ / ame）= rain。罗生门开场是大雨。雨門是入口——不清晰不进入。
+v3.0 change: gates changed from serial to parallel. Shōmon (formerly hm manually dispatching R1+R2+R3) now has two layers: ① Shōmon gate — hm rapid judgment "consequential output? → enter cc pipeline" (~1s); ② Shōmon execution — cc Workflow full R1→R2→R3→loop-until-dry→KANSA pipeline, hm per-Phase synchronous veto.
 
 ---
 
-## 门 2：鏡門 Kyōmon · Mirror Gate
+## Gate 1: 雨門 Amamon · Ambiguity Gate
 
-**罗生门隐喻**: 樵夫检查自己的眼睛——"我看到的是真的吗，还是光影的错觉？" 镜不解释、不争辩、不偏袒——只反射真实。
+**Rashōmon metaphor**: The woodcutter walks through the Rashōmon gate in the rain — before entering, confirm what you are here to examine.
 
-**失败模式**: hm 理解错误（analyst comprehension error）——hm 在比较分析中做出方向性事实错误，基于记忆/印象而非逐行验证。
+**Failure mode**: Wrong question asked.
 
-**触发**: hm 即将做出任何比较性声明时——"A 有 X，B 有 Y"、"local 比 repo 多了 Z"。
+**Trigger**: User question is ambiguous — vague intent, unclear scope, undefined reference.
 
-**动作**: 六条规则——
-1. **双向验证**：对比较的每一侧独立验证。存在→`file:line`，缺失→search command+result。
-2. **证据锚定**：存在声明附精确位置，缺失声明附搜索命令和结果。
-3. **方向显式**：`LOCAL → REPO` / `REPO → LOCAL` / `SYMMETRIC`。
-4. **声明假设**：每次比较前显式声明基线假设，然后验证修正。
-5. **三档处置**：✅确认→放行 / 🛑证伪→硬阻断 / ⚠️不确定→标注后放行。
-6. **记忆声明**：无可检索来源→`[memory/unsourced]`，⚠️档。
+**Action**: Must `clarify()` before acting. Do not guess.
 
-**机械后盾**: 每条比较声明须以 `[鏡門 ✓]` 开头并附验证证据。
+**Design rationale**: Spending 30 minutes running a full QUINTE only to discover everyone misunderstood the question is far more expensive than asking one clarifying question.
 
-**v3.0 操作者**: hm (xhigh reasoning)，在 Phase -1 并行执行
+**v3.0 operator**: hm (xhigh reasoning), executed in parallel in Phase -1.
 
-**命名**: 鏡（かがみ / kagami）= mirror。
+**Naming**: 雨 (あめ / ame) = rain. The film opens in heavy rain at the Rashōmon gate. Amamon is the entry point — if the question is unclear, do not enter.
 
 ---
 
-## 门 3：證門 Shōmon · QUINTE Gate
+## Gate 2: 鏡門 Kyōmon · Mirror Gate
 
-**羅生門 metaphor**: Witnesses testify inside the gate. Truth emerges when one witness, reviewing *another's* account, spots what that witness could not see about themselves.
+**Rashōmon metaphor**: The woodcutter checks his own eyes — "Did I see what I think I saw, or was it a trick of the light?" The mirror does not speak. It does not argue. It does not favor. It only reflects what is there.
 
-**v3.0 两层设计**:
+**Failure mode**: hm comprehension error — hm makes directional factual errors in comparative analysis, based on memory/impression rather than line-by-line verification.
+
+**Trigger**: Whenever hm is about to make a comparative claim — "A has X, B has Y," "local added Z compared to repo."
+
+**Action**: Six rules —
+1. **Bidirectional verification**: Independently verify each side of the comparison. Exists → `file:line`. Missing → search command + result.
+2. **Evidence anchoring**: Existence claims include exact location. Absence claims include search command and result.
+3. **Directional explicitness**: `LOCAL → REPO` / `REPO → LOCAL` / `SYMMETRIC`.
+4. **Declared assumptions**: State baseline assumptions before each comparison, then verify and correct.
+5. **Three-tier disposition**: ✅ confirmed → pass / 🛑 falsified → hard block / ⚠️ uncertain → tag and pass.
+6. **Memory declaration**: No retrievable source → `[memory/unsourced]`, ⚠️ tier.
+
+**Mechanical enforcement**: Every comparative statement must begin with `[鏡門 ✓]` followed by verification evidence.
+
+**v3.0 operator**: hm (xhigh reasoning), executed in parallel in Phase -1.
+
+**Naming**: 鏡 (かがみ / kagami) = mirror. Yata no Kagami (八咫鏡), the sacred mirror that reflects truth without interpretation.
+
+---
+
+## Gate 3: 證門 Shōmon · Testimony Gate
+
+**Rashōmon metaphor**: Witnesses testify inside the gate. Truth emerges when one witness, reviewing *another's* account, spots what that witness could not see about themselves.
+
+**v3.0 two-layer design**:
 
 ```
-證門 = 闸门层(hm, ~1s) + 执行层(cc Workflow, 30-180s)
+Shōmon = gate layer (hm, ~1s) + execution layer (cc Workflow, 30-180s)
 ```
 
-### 闸门层（Phase -1，hm 并行执行）
+### Gate Layer (Phase -1, hm parallel execution)
 
-**失败模式**: 不必要的 QUINTE（trivial query getting full debate）或遗漏 QUINTE（conclusion user may rely on but not debated）。
+**Failure mode**: Unnecessary QUINTE (trivial query getting full debate) or missed QUINTE (conclusion user may rely on but not debated).
 
-**触发**: 用户问题可能产生用户会依赖的结论时。
-**动作**: 快速判断——结论性输出？→ 进入 cc pipeline。非结论性（如"这个文件在哪"）→ 跳过 QUINTE。
-**不自行判断简化**: "这个简单不需要 QUINTE" = violation。简单任务藏着微妙错误是 QUINTE 的存在意义。
+**Trigger**: User question may produce a conclusion the user will rely on.
+**Action**: Rapid judgment — consequential output? → enter cc pipeline. Non-consequential (e.g., "where is this file") → skip QUINTE.
+**Do not self-judge simplicity**: "This is too simple for QUINTE" = violation. Simple tasks hiding subtle errors are exactly why QUINTE exists.
 
-### 执行层（Phase 0-6，cc Workflow 执行，hm 同步否决）
+### Execution Layer (Phase 0-6, cc Workflow + hm synchronous veto)
 
 cc Workflow pipeline:
 ```
-Phase 0: Agent manifest 生成
-Phase 1: R1 — parallel 四方独立分析
-Phase 2: Auto-diff claims 共识/分歧
-Phase 3: R2 — 跨模型对抗性验证
-Phase 4: rx 裁判 + 跨轮一致性审查
-Phase 5: loop-until-dry 收敛
-Phase 6: KANSA 監査
+Phase 0: Agent manifest generation
+Phase 1: R1 — parallel four-agent independent analysis
+Phase 2: Auto-diff claims consensus/dispute
+Phase 3: R2 — cross-model adversarial verification
+Phase 4: rx cross-judgment + cross-round consistency review
+Phase 5: loop-until-dry convergence
+Phase 6: KANSA audit (監査)
 ───────────────────────
-每 Phase: hm 同步否决 (APPROVE/REJECT/ABORT/MODIFY)
+Each Phase: hm synchronous veto (APPROVE/REJECT/ABORT/MODIFY)
 ```
 
-**v3.0 操作者**: hm（闸门判断）→ cc Workflow（执行引擎）+ hm（同步否决监督层）
+**v3.0 operator**: hm (gate judgment) → cc Workflow (execution engine) + hm (synchronous veto oversight).
 
-**命名**: 證（しょう / shō）= testimony, evidence。證門是闸门+对质的完整机制。
+**Naming**: 證 (しょう / shō) = testimony, evidence. Shōmon is the complete gate + confrontation mechanism.
 
 ---
 
-## 门 4：閂門 Kan'nukimon · Anti-Drift Gate
+## Gate 4: 閂門 Kan'nukimon · Anti-Drift Gate
 
-**罗生门隐喻**: 门闩——不许证人串供。每个人的供述必须独立，不受外部关联污染。
+**Rashōmon metaphor**: The bolt — witnesses must not collude. Each testimony must be independent, uncontaminated by external associations.
 
-**失败模式**: prompt 污染/概念碰撞（prompt contamination / concept collision）
+**Failure mode**: Prompt contamination / concept collision.
 
-**触发**: 每次向外部 agent（hm/cw/omp/rx）发送 prompt 时。
+**Trigger**: Every prompt dispatch to external agents (cc, cw, omp, rx).
 
-**动作**: 三层法——
-1. **Task-first**: 具体任务放 prompt 最前面
-2. **语义隔离**: "ONLY Y" 替代 "NOT X"，建立正向身份
-3. **强制首行复述**: 要求 `TASK: [restatement]`，漂移在第一句即可检测
+**Action**: Three-layer defense —
+1. **Task-first**: The specific task goes at the very beginning of the prompt
+2. **Semantic isolation**: "ONLY Y" replaces "NOT X" — build a positive identity rather than suppressing a negative one
+3. **Forced first-line restatement**: Require `TASK: [restatement]` — drift is caught in the first sentence, not after 120 seconds of wasted computation
 
-**v3.0 操作者**: hm（在 Phase -1 并行执行时审核 prompt 包装）+ cc（在 Workflow agent dispatch 时自动应用三层法）
+**v3.0 operator**: hm (audits prompt wrapping during Phase -1 parallel execution) + cc (auto-applies three-layer wrapping during Workflow agent dispatch).
 
-**命名**: 閂（かんぬき / kan'nuki）= bolt, latch。
+**Naming**: 閂 (かんぬき / kan'nuki) = bolt, latch.
 
 ---
 
-## 执行流程 (v3.0)
+## Execution Flow (v3.0)
 
 ```
-用户问题
+User Question
   │
   ▼
 ┌─────────────────────────────────────────────────────────┐
-│  四道门 — hm 并行执行 (~5s)                              │
+│  Four Gates — hm parallel (~5s)                          │
 │                                                         │
 │  ┌──────┐ ┌──────┐ ┌──────────┐ ┌──────┐              │
-│  │ 雨門 │ │ 鏡門 │ │ 證門(闸门)│ │ 閂門 │              │
+│  │ 雨門 │ │ 鏡門 │ │ 證門(gate)│ │ 閂門 │              │
 │  │      │ │      │ │          │ │      │              │
 │  │ambiguous│compar-│ │conclusion│ │prompt│              │
-│  │?→     │ │ative  │ │user may  │ │污染?→ │              │
-│  │clarify│ │claim? │ │rely on?  │ │3-layer│              │
-│  │       │ │→verify│ │→pipeline │ │wrapper│              │
+│  │?→     │ │ative  │ │user may  │ │contam?│             │
+│  │clarify│ │claim? │ │rely on?  │ │→3-layer│            │
+│  │       │ │→verify│ │→pipeline │ │wrapper│             │
 │  └──┬───┘ └──┬───┘ └────┬─────┘ └──┬───┘              │
 │     └────────┴──────────┴──────────┘                    │
-│               hm 上下文注入                               │
+│               hm context injection                       │
 └──────────────────┬──────────────────────────────────────┘
                    ▼
 ┌─────────────────────────────────────────────────────────┐
-│  cc Workflow — 證門执行层                                │
+│  cc Workflow — Shōmon execution layer                    │
 │                                                         │
-│  Phase 0: Agent manifest → 必须参与方清单                 │
-│  Phase 1: R1 parallel 四方 (cc/hm/cw/omp)               │
-│  Phase 2: Auto-diff claims (共识/分歧池)                  │
-│  Phase 3: R2 跨模型对抗性验证 (per-dispute 3 refuters)    │
-│  Phase 4: rx 纯推理裁判 + 跨轮一致性 Agent                │
-│  Phase 5: loop-until-dry (双critic + 双条件终止)          │
-│  Phase 6: KANSA 監査 (毒化检测 + 越权标注)                │
+│  Phase 0: Agent manifest → mandatory participant list   │
+│  Phase 1: R1 parallel 4-agent (cc/hm/cw/omp)           │
+│  Phase 2: Auto-diff claims (consensus/dispute pools)    │
+│  Phase 3: R2 cross-model adversarial (per-dispute 3 ref)│
+│  Phase 4: rx cross-judgment + cross-round Agent         │
+│  Phase 5: loop-until-dry (dual critic + dual condition) │
+│  Phase 6: KANSA audit (poison detect + overreach tag)   │
 │  ─────────────────────────────────────                  │
-│  每 Phase 后: hm 同步否决 (APPROVE/REJECT/ABORT/MODIFY)  │
+│  Each Phase: hm sync veto (APPROVE/REJECT/ABORT/MODIFY) │
 └──────────────────┬──────────────────────────────────────┘
                    ▼
-              hm 终裁展示 + push gate
+              hm final presentation + push gate
 ```
 
-## 关键澄清
+## Key Clarifications
 
-- **證門 ≠ cc Workflow pipeline。** 證門闸门（~1s 判断）和證門执行（pipeline）是两层。闸门决定"要不要进 pipeline"，执行层是 pipeline 本身。
-- **四门都是 hm 在 Phase -1 并行执行的闸门检查**，每个 ~1-2s。它们不执行完整辩论，只做进入判断。
-- **cc Workflow 是證門授权后的执行引擎**，不是證門本身。
+- **Shōmon ≠ cc Workflow pipeline.** Shōmon gate (~1s judgment) and Shōmon execution (pipeline) are two layers. The gate decides "enter the pipeline?" The execution layer is the pipeline itself.
+- **All four gates are hm-operated gate checks in Phase -1**, each ~1-2s. They do not execute the full debate — they make entry decisions.
+- **cc Workflow is the execution engine authorized by Shōmon**, not Shōmon itself.
 
 ---
 
