@@ -172,7 +172,7 @@ The v3.0 architecture separates these concerns:
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-## The Four Gates · 四道門
+## The Four Gates (四道門, shidōmon)
 
 Four gates, four failure modes. Each gate is a mandatory checkpoint operated by hm in Phase -1, running in parallel (~5s). They are not ceremonial — each prevents a class of error that has been observed in production and caused by the previous architecture. The gates follow the woodcutter's journey in Kurosawa's *Rashomon*: arrive in rain at the gate, check your own eyes before you look at others, let the witnesses testify, then bolt the door so no one colludes.
 

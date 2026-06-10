@@ -1,4 +1,4 @@
-# The Four Gates · 四道門 (v3.0)
+# The Four Gates (四道門, shidōmon) — v3.0
 
 QUINTE v3.0's four mandatory gates. **Parallel execution (~5s), hm-operated.** Shōmon gate layer makes a rapid "does this need QUINTE?" determination; if passed, cc Workflow executes the full pipeline.
 

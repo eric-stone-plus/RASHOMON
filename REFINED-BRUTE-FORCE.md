@@ -26,7 +26,7 @@ Refined Brute Force = brute-force computation core + structural governance + rol
 - Cross-detection uses *more compute* to surface blind spots — not smarter algorithms
 
 **What is refined about QUINTE**:
-- Four Gates (四道門): targeted failure-mode defense, not "run more checks"
+- Four Gates (四道門, shidōmon): targeted failure-mode defense, not "run more checks"
   - 雨門 (Amamon): ambiguity detection → clarify back
   - 鏡門 (Kyōmon): bidirectional grep + evidence anchoring + directional explicitness
   - 證門 (Shōmon): cross-examination topology with recusal rules
