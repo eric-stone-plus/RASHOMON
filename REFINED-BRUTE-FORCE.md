@@ -9,7 +9,7 @@
 
 ## Origin
 
-Coined by **omp** (R1, 2026-06-09 meta-QUINTE) during the [*«при достаточной тяге и кирпич полетит»* debate](https://github.com/eric-stone-plus/QUINTE/blob/main/debates/2026-06-09-brute-force/). The user proposed QUINTE was brute-force aesthetics — Soviet aviation style: compensate for lack of refinement with raw power. Five agents debated whether QUINTE is truly brute force or something more nuanced.
+Coined by **omp** (R1, 2026-06-09 meta-QUINTE) during the [*«при достаточной тяге и кирпич полетит»* debate](https://github.com/eric-stone-plus/QUINTE/blob/master/debates/2026-06-09-brute-force/). The user proposed QUINTE was brute-force aesthetics — Soviet aviation style: compensate for lack of refinement with raw power. Five agents debated whether QUINTE is truly brute force or something more nuanced.
 
 omp's three-tier verdict (core = brute, governance = refined, deployment = brute) produced the synthesis label: **Refined Brute Force**.
 
@@ -47,13 +47,22 @@ All five agents share identical model weights. Cross-detection works through **a
 
 The protocol was designed for multi-model deployment. Current same-model implementation is a cost constraint, not a permanent design choice.
 
-## Cultural References
+## The Soviet Aviation Analogy
 
-| Language | Phrase | Context |
-|----------|--------|---------|
-| RU | При достаточной тяге и кирпич полетит | Soviet aviation proverb — MiG-25: massive engines, stainless steel airframe |
-| EN | A triumph of thrust over aerodynamics | F-4 Phantom II epitaph |
-| JA | 力任せ (ちからまかせ) | Relying on brute strength; forcing through with power |
+> *«При достаточной тяге и кирпич полетит.»*
+> "With enough thrust, even a brick will fly."
+
+The phrase is attributed to the culture of the Mikoyan-Gurevich (MiG) design bureau during the Cold War. It captures an engineering philosophy of radical pragmatism: when you cannot match your adversary's material science or manufacturing precision, you compensate with raw power.
+
+The MiG-25 (NATO: Foxbat) is the canonical example. While American engineers pursued titanium airframes and exquisite aerodynamics for their Mach-3 interceptors, Soviet engineers faced a different set of constraints. Titanium was expensive and difficult to work with given Soviet metallurgy. The solution was not better materials — it was bigger engines. The MiG-25's Tumansky R-15 turbojets produced 11 tonnes of thrust each. Two of them, side by side, propelled a largely stainless-steel airframe to Mach 3.2. The aircraft was heavy, aerodynamically crude, and drank fuel at an alarming rate — but it *worked*. It intercepted SR-71 Blackbirds, outran missiles, and forced the United States to redesign its next-generation fighter program in response to a threat that turned out to be largely imaginary. The Foxbat was a brick. It flew because the engines were enormous.
+
+The American equivalent — "a triumph of thrust over aerodynamics" — was coined for the McDonnell Douglas F-4 Phantom II, another aircraft that proved more successful than its ungainly appearance suggested. The Japanese phrase *力任せ* (*chikaramakase*, "forcing through with brute strength") captures the same ethos from a different cultural angle.
+
+**QUINTE sits in the same lineage.** It does not rely on a single model's elegant reasoning. It burns five agents across three rounds to surface blind spots through structured redundancy. The difference: the Soviet brick was genuinely just a brick with massive engines. QUINTE's brick has fins (the Four Gates, each targeting a specific failure mode) and a flight computer (the Orchestration-Oversight Separation). The thrust is still the dominant force — confidence comes from burning more compute, not from being smarter per token — but the structure makes the thrust *governed* rather than *chaotic*.
+
+> *«При достаточной тяге и кирпич полетит — но с хвостовым оперением и автопилотом.»*
+> "With enough thrust, even a brick flies — but this one has fins and a flight computer."
+> — omp R1, 2026-06-09
 
 ## Relationship to Other RASHOMON Concepts
 
