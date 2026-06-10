@@ -172,6 +172,22 @@ The v3.0 architecture separates these concerns:
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
+## Mathematical Foundations
+
+> ⚠️ The relationship between QUINTE and ML Rashomon Set theory is **heuristic, not isomorphic**. QUINTE lacks the formal prerequisites — loss function, optimal model, ground truth. Partial Order consensus (JMLR 2023) is the strongest structural analogy. See [references/mathematical-foundations.md](references/mathematical-foundations.md).
+
+### Model Multiplicity (Breiman 2001)
+
+The mathematical existence proof for QUINTE's core premise. In ML, many models with different structures achieve near-identical performance — single-model feature importance is unreliable. QUINTE extends this insight: a single agent's analysis is unreliable not because the agent is flawed, but because **model multiplicity is a mathematical property of underdetermined problem spaces**.
+
+### Partial Order Consensus (JMLR 2023, Peer-Reviewed)
+
+When only statements on which **all** models agree are retained, the result is a partial order — pairs where consensus exists are ranked; pairs with conflicting evidence are left **incomparable**. This is the exact mechanism of QUINTE's R2 consensus detection: unanimous claims enter the consensus pool, contested claims are deferred. The theorem that partial orders are "conservative over total rankings" mirrors QUINTE's design — R3 verdicts are a subset of what any individual agent would claim.
+
+### Rashomon Ratio
+
+`|consensus claims| / |union of all claims|` — a stability coefficient for R3 verdicts. High ratio → robust across perspectives. Low ratio despite convergence → **Rashomon-fragile**, surface as warning.
+
 ## The Four Gates
 
 Four gates, four failure modes. Each gate is a mandatory checkpoint operated by hm in Phase -1, running in parallel (~5s). They are not ceremonial — each prevents a class of error that has been observed in production and caused by the previous architecture. The gates follow the woodcutter's journey in Kurosawa's *Rashomon*: arrive in rain at the gate, check your own eyes before you look at others, let the witnesses testify, then bolt the door so no one colludes.
@@ -285,8 +301,9 @@ The philosophical position: **epistemic certainty is expensive. v3.0 makes it ch
 | File | Content |
 |------|---------|
 | [GATES.md](GATES.md) | The Four Gates — 雨門·鏡門·證門·閂門 (v3.0: parallel, cc-backed) |
-| [CONCEPTS.md](CONCEPTS.md) | Core concepts — Orchestration-Oversight Separation, Three-Mechanism Epistemology, Cross-Model Adversarial Depth |
+| [CONCEPTS.md](CONCEPTS.md) | Core concepts — Orchestration-Oversight Separation, Rashomon Depth, YNI, Refined Brute Force |
 | [PHENOMENOLOGY.md](PHENOMENOLOGY.md) | Phenomenology of the orchestrated gaze — the philosophical dimensions |
+| [references/mathematical-foundations.md](references/mathematical-foundations.md) | Mathematical foundations — Model Multiplicity, Partial Order Consensus, Rashomon Ratio |
 
 ## Ecosystem
 

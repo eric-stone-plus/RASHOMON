@@ -129,6 +129,10 @@ Unchanged in v3.0. Measures the frequency of hm directional errors and Kyōmon's
 | Kyōmon | 鏡門 | きょうもん | Mirror Gate |
 | Shōmon | 證門 | しょうもん | Testimony Gate |
 | Kan'nukimon | 閂門 | かんぬきもん | Anti-Drift Gate |
+| Model Multiplicity | — | — | Mathematical basis: multiple equally-valid analyses exist |
+| Partial Order Consensus | — | — | R2 consensus as partial order with incomparable pairs (JMLR 2023) |
+| Rashomon Ratio | — | — | Stability coefficient = |consensus| / |union| |
+| Uncertainty Decomposition | — | — | Aleatoric (雨門) vs Epistemic (證門) uncertainty routing |
 
 ---
 
