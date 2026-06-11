@@ -313,21 +313,20 @@ The philosophical position: **epistemic certainty is expensive. v3.1 makes it ch
 |------|------|----------|
 | [RASHOMON](https://github.com/eric-stone-plus/RASHOMON) | Design philosophy | *Why* multi-perspective truth-seeking? |
 | [QUINTE](https://github.com/eric-stone-plus/QUINTE) | Debate protocol | *How* to orchestrate cross-examination? |
-| [KANSA](https://github.com/eric-stone-plus/KANSA) | Verdict audit | *Sound?* Does the conclusion hold up? |
-| [KENGEN](https://github.com/eric-stone-plus/KENGEN) | Authorization perimeter | *May I* execute this operation? |
+| [HIGHBALL](https://github.com/eric-stone-plus/HIGHBALL) | Constraint layer | *Sound?* verdict audit + *May I?* authorization perimeter |
 
 ## Relationship
 
 ```
 RASHOMON (why) ──→ QUINTE (how) ──→ conclusions
      │                                    │
-     ├── KANSA (sound?) ── R3 audit ──────┤
-     └── KENGEN (may?) ── authorization ──┘
+     ├── HIGHBALL · KANSA (sound?) ── R3 audit ──────┤
+     └── HIGHBALL · KENGEN (may?) ── authorization ──┘
               │
               └── BANNIN (guard) — session-level enforcement
 ```
 
-RASHOMON and QUINTE form the epistemology→methodology axis. KANSA audits verdict integrity. KENGEN gates external actions with BANNIN as the active session-level guard.
+RASHOMON and QUINTE form the epistemology→methodology axis. HIGHBALL bundles KANSA (verdict audit) and KENGEN (authorization perimeter with BANNIN guard).
 
 ## Cultural Anchors
 
