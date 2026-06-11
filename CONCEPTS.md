@@ -1,6 +1,6 @@
 # Core Concepts
 
-Operational concepts extracted from the Rashōmon metaphor for the QUINTE protocol. v3.1 additions: Orchestration-Oversight Separation, Three-Mechanism Epistemology, Cross-Model Adversarial Depth, Refined Brute Force.
+Operational concepts extracted from the Rashōmon metaphor for the QUINTE protocol. v3.1 additions: Orchestration-Oversight Separation, Cross-Model Adversarial Depth, Refined Brute Force. (Three-Mechanism Epistemology retained as v3.0 design rationale — removed from PROTOCOL.md in v3.1 spec trim.)
 
 ---
 
@@ -77,7 +77,7 @@ YNI = 1 - (intersection of claims / union of claims)
 - YNI ≈ 0.3–0.5: Healthy divergence → R2 flags disputes.
 - YNI > 0.7: High dispersion → the original question may be ambiguous. Return to Amamon.
 
-**v3.1 revision**: YNI is now computed by Phase 2 auto-diff (claims comparison after JSON Schema alignment), not by hm manual estimation. Mechanical diff eliminates subjective bias in hm's dispute annotation.
+**v3.1 revision**: YNI is computed by hm from R1 claims intersection/union. Mechanical computation eliminates subjective bias in hm's dispute annotation.
 
 ---
 
