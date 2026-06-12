@@ -154,7 +154,7 @@ The v3.1 architecture (simplified from v3.0) separates these concerns:
 │  │  └──────────┬───────────┘                                             │ │
 │  │             ▼                                                         │ │
 │  │  ┌──────────────────────┐                                             │ │
-│  │  │ Phase 5: loop-until  │ ← dual critic (diff config)                │ │
+│  │  │ Phase 5: loop-until  │ ← single critic + 3-round cap              │ │
 │  │  │ -dry Convergence     │   ①2 rounds no new ②div↓+repeat>90%          │ │
 │  │  │ dry→escalate human   │   code claims→Bash runtime verify            │ │
 │  │  │ → hm sign-off        │                                             │ │
