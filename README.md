@@ -12,8 +12,6 @@ In v2.x, Hermes was both orchestrator (deciding who speaks, in what order, on wh
 
 The v3.1 architecture (simplified from v3.0) separates these concerns:
 
-> ⚠️ The diagram below illustrates the full v3.0 design for historical reference. v3.1 simplifies this by removing the three-mechanism epistemology, cross-round consistency Agent, and auto-diff JSON Schema from the protocol specification. The core insight — Orchestration-Oversight Separation — remains unchanged.
-
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                        RASHOMON v3.1 — Architecture                          │
@@ -22,32 +20,25 @@ The v3.1 architecture (simplified from v3.0) separates these concerns:
 │  │                    EXECUTION DOMAIN (Claude Code)                      │ │
 │  │                                                                       │ │
 │  │  ┌──────────────────────────────────────────────────────────────┐    │ │
-│  │  │  MECHANISM 1: Agent (Internal Sub-Agents)                     │    │ │
-│  │  │  · Explore:     full file enumeration (replaces hm memory)    │    │ │
-│  │  │  · Plan:        architecture validation                       │    │ │
-│  │  │  · general-purpose: completeness critic / poison detection    │    │ │
-│  │  │  · Manifest Agent: reads registry → mandatory participant list│    │ │
-│  │  │  · Cross-Round Agent: R1→R2→R3 stance drift detection        │    │ │
-│  │  │  Epistemology: independent contexts → decorrelated attention   │    │ │
-│  │  └──────────────────────────────────────────────────────────────┘    │ │
-│  │                                                                       │ │
-│  │  ┌──────────────────────────────────────────────────────────────┐    │ │
-│  │  │  MECHANISM 2: Workflow (Orchestration Engine)                 │    │ │
-│  │  │  · pipeline():  R1→diff→R2 adversarial→rx→loop-until-dry→KANSA│   │ │
-│  │  │  · parallel():  4-agent R1 dispatch / per-dispute 3 refuters  │    │ │
-│  │  │  · agent({schema}): JSON Schema enforced structured output    │    │ │
-│  │  │  · Adversarial Verification: per-disagreement 3 refuter agents│    │ │
-│  │  │  · loop-until-dry: dual-condition convergence + escalate      │    │ │
+│  │  │  PIPELINE: Phase 0→1→2→3→4→5→5a→6                            │    │ │
+│  │  │  · Phase 0: Agent Manifest → mandatory participant list       │    │ │
+│  │  │  · Phase 1: R1 4-Agent parallel (cc+cw+omp+hm)                │    │ │
+│  │  │  · Phase 2: Auto-Diff claims → consensus/dispute pools        │    │ │
+│  │  │  · Phase 3: R2 Adversarial — 3 refuters per dispute           │    │ │
+│  │  │  · Phase 4: rx Cross-Judge — pure reasoning review            │    │ │
+│  │  │  · Phase 5: Loop-Until-Dry — single critic + 3-round cap      │    │ │
+│  │  │  · Phase 5a: omp Verification — LSP/DAP/exec claims           │    │ │
+│  │  │  · Phase 6: KANSA Dual Verdict (監査) — Consul A + Auditor B  │    │ │
 │  │  │  Epistemology: structural guarantees — cannot skip, cannot miss│    │ │
 │  │  └──────────────────────────────────────────────────────────────┘    │ │
 │  │                                                                       │ │
 │  │  ┌──────────────────────────────────────────────────────────────┐    │ │
-│  │  │  MECHANISM 3: Bash (External Agents)                          │    │ │
-│  │  │  · hermes chat -q "..."    → hm (oversight + participant)     │    │ │
-│  │  │  · codewhale exec --auto   → cw (deep analysis + impl verify) │    │ │
-│  │  │  · reasonix run --effort max → rx (pure reasoning cross-judge)│    │ │
-│  │  │  · omp "..."               → omp (rapid reasoning + security) │    │ │
-│  │  │  Epistemology: toolchain diversity → decorrelated blind spots │    │ │
+│  │  │  BASH (External Agents) — toolchain diversity                  │    │ │
+│  │  │  · hermes chat -q    → hm (oversight + participant)            │    │ │
+│  │  │  · codewhale exec    → cw (deep analysis + impl verification)  │    │ │
+│  │  │  · reasonix run      → rx (pure reasoning cross-judge, R2 only)│    │ │
+│  │  │  · omp               → omp (rapid reasoning + LSP/DAP)         │    │ │
+│  │  │  Epistemology: toolchain diversity → decorrelated blind spots  │    │ │
 │  │  └──────────────────────────────────────────────────────────────┘    │ │
 │  │                                                                       │ │
 │  │  ┌──────────────────────────────────────────────────────────────┐    │ │
@@ -57,6 +48,7 @@ The v3.1 architecture (simplified from v3.0) separates these concerns:
 │  │  │  · State Persistence:     structured logs→~/.hermes/quinte/   │    │ │
 │  │  │  · Human Intervention:    per-phase injection + dry→escalate  │    │ │
 │  │  │  · Truth Verification:    code claims→Bash runtime execution  │    │ │
+│  │  │  · Metrics: Fleiss' κ (consistency) + κ-drift (drift detect)  │    │ │
 │  │  └──────────────────────────────────────────────────────────────┘    │ │
 │  └───────────────────────────────────────────────────────────────────────┘ │
 │                                    │                                        │
@@ -73,11 +65,6 @@ The v3.1 architecture (simplified from v3.0) separates these concerns:
 │  │  │  │ 雨門      │ │ 鏡門      │ │ 證門      │ │ 閂門      │       │    │ │
 │  │  │  │ Amamon   │ │ Kyōmon   │ │ Shōmon   │ │Kan'nukimon│      │    │ │
 │  │  │  │          │ │          │ │          │ │          │       │    │ │
-│  │  │  │"Am I     │ │"Did I    │ │"Does this│ │"No witness│      │    │ │
-│  │  │  │ asking   │ │ see what │ │ need full│ │ collusion"│      │    │ │
-│  │  │  │ the right│ │ I think  │ │ QUINTE?" │ │           │      │    │ │
-│  │  │  │ question?"│ │ I saw?"  │ │          │ │           │      │    │ │
-│  │  │  │          │ │          │ │          │ │           │      │    │ │
 │  │  │  │ambiguous?│ │comparat- │ │conclus-  │ │every      │      │    │ │
 │  │  │  │→clarify  │ │ive claim?│ │ion user  │ │prompt:    │      │    │ │
 │  │  │  │          │ │→bidirect-│ │may rely  │ │3-layer    │      │    │ │
@@ -119,9 +106,9 @@ The v3.1 architecture (simplified from v3.0) separates these concerns:
 │  │      │                                                                │ │
 │  │      ▼                                                                │ │
 │  │  ┌──────────────────────┐                                             │ │
-│  │  │ Phase -1: hm Four Gates│ ← hm parallel (~5s)                        │ │
+│  │  │ Phase -1: hm Four Gates│ ← hm parallel (~5s)                       │ │
 │  │  │ 雨門+鏡門+證門+閂門  │                                             │ │
-│  │  │ → hm context inject  │                                             │ │
+│  │  → hm context inject      │                                             │ │
 │  │  └──────────┬───────────┘                                             │ │
 │  │             ▼                                                         │ │
 │  │  ┌──────────────────────┐                                             │ │
@@ -131,44 +118,45 @@ The v3.1 architecture (simplified from v3.0) separates these concerns:
 │  │             ▼                                                         │ │
 │  │  ┌──────────────────────┐                                             │ │
 │  │  │ Phase 1: R1 4-Agent  │ ← cc parallel{cc,cw,omp,hm}                │ │
-│  │  │ JSON (loose schema)  │   TASK: first-line anchor                   │ │
+│  │  │ independent analysis │   TASK: first-line anchor                   │ │
 │  │  │ → hm sync sign-off   │                                             │ │
 │  │  └──────────┬───────────┘                                             │ │
 │  │             ▼                                                         │ │
 │  │  ┌──────────────────────┐                                             │ │
-│  │  │ Phase 2: Auto-Diff   │ ← JSON Schema claim diff                   │ │
-│  │  │ same→consensus pool  │   diff→dispute pool                         │ │
-│  │  │ new→schema extension │   → hm sign-off                             │ │
-│  │  └──────────┬───────────┘                                             │ │
-│  │             ▼                                                         │ │
-│  │  ┌──────────────────────┐                                             │ │
-│  │  │ Phase 3: R2 Adversarial│ ← per-dispute 3 refuters (≥1 cross-model)   │ │
-│  │  │ ≥2/3 refute→drop     │   1/3→contested keep                        │ │
-│  │  │ → hm sign-off (anti-false-positive)│                                             │ │
-│  │  └──────────┬───────────┘                                             │ │
-│  │             ▼                                                         │ │
-│  │  ┌──────────────────────┐                                             │ │
-│  │  │ Phase 4: rx Cross-Judge│ ← structured claims JSON (read-only)        │ │
-│  │  │ + Cross-Round Agent  │   R1→R2→R3 drift detection                 │ │
+│  │  │ Phase 2: Auto-Diff   │ ← claims diff → consensus/dispute pools    │ │
 │  │  │ → hm sign-off        │                                             │ │
+│  │  └──────────┬───────────┘                                             │ │
+│  │             ▼                                                         │ │
+│  │  ┌──────────────────────┐                                             │ │
+│  │  │ Phase 3: R2 Adversarial│ ← per-dispute 3 refuters                   │ │
+│  │  │ ≥2/3 refute→drop     │   1/3→contested keep                        │ │
+│  │  │ → hm sign-off        │                                             │ │
+│  │  └──────────┬───────────┘                                             │ │
+│  │             ▼                                                         │ │
+│  │  ┌──────────────────────┐                                             │ │
+│  │  │ Phase 4: rx Cross-Judge│ ← structured claims (read-only)             │ │
+│  │  │ pure reasoning verdict│   → hm sign-off                             │ │
 │  │  └──────────┬───────────┘                                             │ │
 │  │             ▼                                                         │ │
 │  │  ┌──────────────────────┐                                             │ │
 │  │  │ Phase 5: loop-until  │ ← single critic + 3-round cap              │ │
-│  │  │ -dry Convergence     │   ①2 rounds no new ②div↓+repeat>90%          │ │
-│  │  │ dry→escalate human   │   code claims→Bash runtime verify            │ │
+│  │  │ -dry Convergence     │   dry→escalate human                        │ │
 │  │  │ → hm sign-off        │                                             │ │
 │  │  └──────────┬───────────┘                                             │ │
 │  │             ▼                                                         │ │
 │  │  ┌──────────────────────┐                                             │ │
-│  │  │ Phase 6: KANSA Audit │ ← KANSA persona + poison detect             │ │
-│  │  │ rotating auditor     │   overreach tagging                          │ │
-│  │  │ low-quality→downgrade│   → hm final sign-off                        │ │
+│  │  │ Phase 5a: omp Verify │ ← LSP/DAP/exec ≤5 high-impact claims       │ │
+│  │  │ verified/falsified   │   → feeds Phase 5 convergence               │ │
 │  │  └──────────┬───────────┘                                             │ │
 │  │             ▼                                                         │ │
 │  │  ┌──────────────────────┐                                             │ │
-│  │  │ hm Kan'nukimon: Final│ ← structured log → ~/.hermes/quinte/        │ │
-│  │  │ + push gate          │   replay-auditable                           │ │
+│  │  │ Phase 6: KANSA Dual  │ ← Consul A (hm) + Auditor B                │ │
+│  │  │ Verdict (監査)        │   consensus/dissent → hm final sign-off     │ │
+│  │  └──────────┬───────────┘                                             │ │
+│  │             ▼                                                         │ │
+│  │  ┌──────────────────────┐                                             │ │
+│  │  │ hm Final + push gate │ ← structured log → ~/.hermes/quinte/        │ │
+│  │  │ Phase 6a cross-match │   replay-auditable                           │ │
 │  │  └──────────────────────┘                                             │ │
 │  └───────────────────────────────────────────────────────────────────────┘ │
 └─────────────────────────────────────────────────────────────────────────────┘

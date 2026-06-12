@@ -102,6 +102,47 @@ where P_o = observed proportion of agreement, P_e = expected proportion under ra
 
 **Relationship to Rashomon Ratio**: Rashomon Ratio = |consensus|/|union| measures claim-level survival rate. κ measures agent-level agreement strength. A debate can have high Ratio (many claims in consensus pool) but low κ (agent agreement barely above chance — large denominator P_e due to claim volume). Together they distinguish "broad but shallow" consensus from "narrow but deep."
 
+### 5.1 Cross-Debate Drift Detection (κ-drift)
+
+Single-debate κ is a snapshot. Systematic change across debates requires temporal monitoring.
+
+**Method**: Record κ_t per debate. Establish baseline μ_κ ± 2σ from first 5 debates. Flag any subsequent debate where |κ_t - μ_κ| > 2σ.
+
+**Interpretation**:
+- κ_t declining → agent agreement weakening over time. Possible causes: model updates, prompt entropy accumulation, concept drift.
+- κ_t rising → agent agreement strengthening. In single-model deployment, rising κ may indicate deepening shared blind spot rather than improving truth-seeking.
+- κ_t volatile → unstable debate dynamics. May reflect inconsistent prompt construction or changing question complexity.
+
+**Precision**: Requires ≥5 debates for stable baseline. Before 5 debates, flag only extreme deviations (κ < 0 or κ > 0.95). Computationally trivial — κ is already computed per debate.
+
+### 5.2 Pairwise κ Dependency Matrix
+
+Global κ aggregates all 5 agents. The pairwise κ matrix decomposes agreement into agent-pair contributions:
+
+```
+        hm    cc    cw    omp   rx
+    hm  1.0   κ_hc  κ_hw  κ_ho  κ_hr
+    cc   —    1.0   κ_cw  κ_co  κ_cr
+    cw   —     —    1.0   κ_wo  κ_wr
+    omp  —     —     —    1.0   κ_or
+    rx   —     —     —     —    1.0
+```
+
+**Interpretation**: High pairwise κ between two agents across multiple debates → redundant information → effective Rashomon Depth < 5. If hm↔cc pairwise κ consistently > 0.8 while hm↔rx κ < 0.4, the debate's effective independent perspectives are approximately 3, not 5.
+
+**Cross-debate tracking**: Pairwise κ drift — if hm↔cc κ drops from 0.7 to 0.3 across 5+ debates, something structural changed in how those agents interact. Flag as potential model update effect or prompt template degradation.
+
+### 5.3 Blind Spots and Mitigations
+
+κ has four structural limitations that must be annotated, not hidden:
+
+| Blind Spot | Description | Mitigation |
+|------------|-------------|------------|
+| **Echo Paradox** | Same-model deployment: independence null is wrong baseline. κ may be inflated — high κ could be model consistency, not evidential convergence. | Annotate κ>0.8 with: "All agents share model weights — high κ may reflect model consistency rather than independent confirmation." |
+| **Binary Compression Loss** | κ operates on confirm/not-confirm. Confidence gradation (strong vs. weak confirm, hedged vs. emphatic) is discarded. | Report κ with 95% CI, not point estimate. Future: weighted κ extension if agents adopt standardized confidence annotations. |
+| **κ≈1.0 = Most Dangerous** | Near-perfect agreement is a red flag for shared blind spot, not a success signal. | κ>0.8 triggers mandatory R2 confirmatory audit annotation. Never report κ≈1.0 as "excellent consensus." |
+| **Small-N Instability** | 5 raters × 15 claims → SE(κ) ≈ ±0.15. Single-debate κ shifts of <0.2 are noise, not signal. | Always report κ with 95% CI. Use κ-drift across ≥5 debates for trend detection — aggregates reduce SE.
+
 ---
 
 ## Excluded Concepts (and Why)
@@ -122,6 +163,7 @@ where P_o = observed proportion of agreement, P_e = expected proportion under ra
 2. Laberge, G., Pequignot, Y., Mathieu, A., Khomh, F., & Marchand, M. (2023). "Partial Order in Chaos: Consensus on Feature Attributions in the Rashomon Set." *Journal of Machine Learning Research*, 24.
 3. Xin, R., Zhong, C., Chen, Z., Takagi, T., Seltzer, M., & Rudin, C. (2022). "Exploring the Whole Rashomon Set of Sparse Decision Trees." *arXiv:2209.08040*.
 4. Li, S., Wang, R., Deng, Q., & Barnard, A. (2023). "Exploring the Cloud of Feature Interaction Scores in a Rashomon Set." *arXiv:2305.10181*.
+5. Fleiss, J.L. (1971). "Measuring Nominal Scale Agreement Among Many Raters." *Psychological Bulletin*, 76(5):378–382.
 
 ---
 
