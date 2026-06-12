@@ -71,7 +71,36 @@ RASHOMON already contains two mathematical constructs that require no external m
 | Concept | Formulation | Mathematical Basis |
 |---------|------------|-------------------|
 | **Yabu no Naka Index (YNI)** | `1 - (intersection / union of claims)` | Jaccard Distance — the canonical set-based divergence metric |
-| **Loop-Until-Dry** | Dual-condition termination (2 rounds no new claims + divergence decrease >90% repeat) | Fixed-Point Convergence — parallels gradient-descent plateau detection heuristics |
+| **Loop-Until-Dry** | Dual-condition termination → single-critic + 3-round hard cap (v3.1) | Fixed-Point Convergence — parallels gradient-descent plateau detection heuristics |
+| **Fleiss' Kappa (κ)** | `κ = (P_o - P_e) / (1 - P_e)` — multi-rater agreement adjusted for chance | Inter-Rater Reliability — distinguishes genuine consensus from same-model echo |
+
+---
+
+## 5. Fleiss' Kappa — Multi-Rater Agreement (Fleiss 1971)
+
+**Source**: Fleiss, J.L. "Measuring Nominal Scale Agreement Among Many Raters." *Psychological Bulletin*, Vol. 76, No. 5 (1971). 37,000+ citations.
+
+**Definition**: For N subjects rated by k raters into m categories, Fleiss' Kappa quantifies agreement beyond chance:
+
+```
+κ = (P_o - P_e) / (1 - P_e)
+```
+
+where P_o = observed proportion of agreement, P_e = expected proportion under random-chance independence.
+
+**QUINTE mapping**: Each debate produces an N-claims × 5-agents binary matrix (confirm / not confirm). Fleiss' Kappa is computed directly from this matrix — zero additional data required.
+
+**Interpretation**:
+- κ > 0.8: near-perfect agreement. In single-model deployment, this may indicate shared blind spot rather than truth — R2 adversarial verification must confirm.
+- 0.4 < κ < 0.8: moderate agreement. Normal healthy debate range.
+- κ < 0.4: weak agreement. Agent perspectives are genuinely divergent — YNI will be high.
+- κ < 0: systematic disagreement below chance. Likely prompt ambiguity → return to Amamon.
+
+**Why it matters**: QUINTE's ≥3/5 voting does not adjust for chance agreement. When all 5 agents share DeepSeek v4-pro weights, their base-rate agreement is elevated — a 4/5 vote may reflect model consistency rather than evidential strength. Kappa surfaces this: if same-model agents agree 70% of the time by chance, a 4/5 vote is less impressive than it looks. Kappa quantifies what REFINED-BRUTE-FORCE.md states qualitatively: "same-model consensus = 1 verification × 3 noise samples."
+
+**Precision**: Computable within QUINTE from native primitives (claim-agent binary matrix). Does not require ground truth, calibrated probabilities, or loss functions. Pairwise Kappa can also be computed for agent-pair dependency analysis — high pairwise κ between hm and cc suggests their votes carry redundant rather than independent information.
+
+**Relationship to Rashomon Ratio**: Rashomon Ratio = |consensus|/|union| measures claim-level survival rate. κ measures agent-level agreement strength. A debate can have high Ratio (many claims in consensus pool) but low κ (agent agreement barely above chance — large denominator P_e due to claim volume). Together they distinguish "broad but shallow" consensus from "narrow but deep."
 
 ---
 
@@ -83,7 +112,7 @@ RASHOMON already contains two mathematical constructs that require no external m
 | **Rashomon Set formal definition** | Requires L̂ and f*, neither of which QUINTE possesses. Would be pseudo-precision. |
 | **Prime Implicants / Petrick's Method** | Boolean algebra concepts with no mapping to QUINTE's semantic consensus domain. |
 | **ε-tolerance quantification** | ML's ε is a continuous real; QUINTE's ≥3/5 threshold is qualitative voting. Non-isomorphic. |
-| **Bayesian belief updating** | RASHOMON deliberately avoids probabilistic calculus — claims are surfaced/disputed/refuted through structural mechanisms, not prior/likelihood/posterior updates. |
+| **Bayesian belief updating** | RASHOMON deliberately avoids probabilistic calculus as a prescriptive framework — claims are surfaced/disputed/refuted through structural mechanisms. Conditional probability notation MAY be used descriptively where existing primitives already capture the conditional relationship (e.g., Rashomon Ratio ≈ P(claim in consensus | claim survived cross-examination)). Full prior/likelihood/posterior calculation deferred — no ground truth for calibration. Explicit conditional dependence statement adopted: shared model weights → agent votes not independent → consensus count ≠ independent confirmations. Fleiss' Kappa is the preferred operational metric for agreement strength. |
 
 ---
 
