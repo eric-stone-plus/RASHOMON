@@ -75,7 +75,7 @@ YNI = 1 - (intersection of claims / union of claims)
 **Interpretation**:
 - YNI ≈ 0: High consistency → ⚠️ possible shared blind spot. R2 performs confirmatory audit.
 - YNI ≈ 0.3–0.5: Healthy divergence → R2 flags disputes.
-- YNI > 0.7: High dispersion → the original question may be ambiguous. Return to Amamon.
+- YNI > 0.7: High dispersion → the original question may be ambiguous. Escalate to human: the question may need re-clarification before re-running.
 
 **v3.1 revision**: YNI is computed by hm from R1 claims intersection/union. Mechanical computation eliminates subjective bias in hm's dispute annotation.
 

@@ -134,9 +134,9 @@ User Question
 │  Phase 1: R1 parallel 4-agent (cc/hm/cw/omp)           │
 │  Phase 2: Auto-diff claims (consensus/dispute pools)    │
 │  Phase 3: R2 cross-model adversarial (per-dispute 3 ref)│
-│  Phase 4: rx cross-judgment + cross-round Agent         │
+│  Phase 4: rx cross-judgment          │
 │  Phase 5: loop-until-dry (single critic + 3-round cap) │
-│  Phase 6: KANSA audit (poison detect + overreach tag)   │
+│  Phase 6: KANSA audit (Consul A + Auditor B)   │
 │  ─────────────────────────────────────                  │
 │  Each Phase: hm sync veto (APPROVE/REJECT/ABORT/MODIFY) │
 └──────────────────┬──────────────────────────────────────┘
