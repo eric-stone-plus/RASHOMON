@@ -28,7 +28,7 @@ The v3.1 architecture (simplified from v3.0) separates these concerns:
 │  │  │  · Phase 4: rx Cross-Judge — pure reasoning review            │    │ │
 │  │  │  · Phase 5: Loop-Until-Dry — single critic + 3-round cap      │    │ │
 │  │  │  · Phase 5a: omp Verification — LSP/DAP/exec claims           │    │ │
-│  │  │  · Phase 6: KANSA Dual Verdict (監査) — Consul A + Auditor B  │    │ │
+│  │  │  · Phase 6: KANSA Dual Verdict — Consul A + Auditor B  │    │ │
 │  │  │  Epistemology: structural guarantees — cannot skip, cannot miss│    │ │
 │  │  └──────────────────────────────────────────────────────────────┘    │ │
 │  │                                                                       │ │
@@ -151,7 +151,7 @@ The v3.1 architecture (simplified from v3.0) separates these concerns:
 │  │             ▼                                                         │ │
 │  │  ┌──────────────────────┐                                             │ │
 │  │  │ Phase 6: KANSA Dual  │ ← Consul A (hm) + Auditor B                │ │
-│  │  │ Verdict (監査)        │   consensus/dissent → hm final sign-off     │ │
+│  │  │ Verdict         │   consensus/dissent → hm final sign-off     │ │
 │  │  └──────────┬───────────┘                                             │ │
 │  │             ▼                                                         │ │
 │  │  ┌──────────────────────┐                                             │ │
