@@ -31,7 +31,7 @@ Rashomon Depth = |{ genuinely different reasoning paths }|
 Claude Code (Execution Domain)       Hermes (Oversight Domain)
 ────────────────────────────         ──────────────────────────
 Workflow pipeline/parallel           Per-Phase synchronous veto
-Agent dispatch + JSON Schema         Cross-round drift detection
+Agent dispatch                    Cross-round drift detection
 Adversarial verification             Quality audit
 loop-until-dry convergence           ABORT cascade authority
 Bash external agent invocation       Context injection (memory → prompt)
@@ -123,7 +123,7 @@ CDA[A, B] = |errors_of_A_found_by_B| / |errors_of_A| - |errors_of_B_found_by_A| 
 
 **Property**: Requires no ground truth. Observes relative detection rates between agent pairs. A positive CDA[hm, omp] means omp consistently finds errors hm's 鏡門 self-audit failed to catch.
 
-**v3.2 addition** (2026-06-12): CDA is the primary metric of KOZO (小僧), HIGHBALL's attention quality measurement layer. Ratified 5/5 QUINTE consensus.
+**v3.1 extension** (2026-06-12): CDA is the primary metric of KOZO (小僧), HIGHBALL's attention quality measurement layer. Ratified 5/5 QUINTE consensus.
 
 ## Diversity Score
 
@@ -137,19 +137,19 @@ where pairwise κ is Cohen's Kappa between agent confirm/not-confirm vectors.
 
 **Interpretation**: Diversity < 0.15 (all pairwise κ > 0.85) triggers an alert: agent outputs are highly correlated — the five agents may be functioning as one model in four additional costumes. This operationalizes the same-model diversity ceiling documented in REFINED-BRUTE-FORCE.md §3.5.
 
-**v3.2 addition** (2026-06-12): Ratified 5/5 QUINTE consensus.
+**v3.1 extension** (2026-06-12): Ratified 5/5 QUINTE consensus.
 
 ## Fleiss' Kappa (κ)
 
 **Definition**: Multi-rater agreement coefficient adjusted for chance agreement. `κ = (P_o - P_e) / (1 - P_e)`. Primary within-debate consistency metric. See [references/mathematical-foundations.md](references/mathematical-foundations.md) §5.
 
-**v3.2 addition** (2026-06-12): Ratified 5/5 QUINTE consensus. Replaces raw ≥3/5 vote counting with chance-adjusted agreement.
+**v3.1 extension** (2026-06-12): Ratified 5/5 QUINTE consensus. Replaces raw ≥3/5 vote counting with chance-adjusted agreement.
 
 ## Normalized Mutual Information (NMI)
 
 **Definition**: Information-theoretic measure of structural similarity between debate agreement patterns. `NMI(X,Y) = 2·I(X;Y) / (H(X)+H(Y))`. Cross-debate drift detection at the debate-pair level. See [references/mathematical-foundations.md](references/mathematical-foundations.md) §6.
 
-**v3.2 addition** (2026-06-12): Requires ≥5 archived debates for stable estimation. Ratified 5/5 QUINTE consensus.
+**v3.1 extension** (2026-06-12): Requires ≥5 archived debates for stable estimation. Ratified 5/5 QUINTE consensus.
 
 ---
 
@@ -181,4 +181,4 @@ where pairwise κ is Cohen's Kappa between agent confirm/not-confirm vectors.
 
 ---
 
-*CONCEPTS-v3.2.md — ratified 2026-06-09, updated 2026-06-12 (CDA, Diversity Score, Fleiss' κ, NMI, KOZO)*
+*CONCEPTS-v3.1.md — ratified 2026-06-09, updated 2026-06-12 (CDA, Diversity Score, Fleiss' κ, NMI, KOZO)*

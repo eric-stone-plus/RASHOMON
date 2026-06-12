@@ -282,7 +282,7 @@ The answer has two layers:
 
 **Layer 1 — Yes, it is brute force, and that is the point.** DeepSeek API pricing (~$0.14/M input, ~$0.28/M output tokens) makes a full 5-agent debate cost approximately $0.01–0.05. At that price, the marginal cost of another round of cross-verification is negligible relative to the cost of an undetected error. v3.1's cost circuit breaker (claims≤100, refutations≤50, loops≤5) bounds the worst case to approximately $1–3 per debate — cheaper than 5 minutes of human review.
 
-**Layer 2 — But brute force without structure is just expensive noise.** loop-until-dry with dual-condition termination (not just "keep going") and escalate-to-human (not auto-accept) ensures the brute force has a stopping criterion. Cross-model adversarial verification ensures the brute force isn't just same-model echo. The governance layer ensures the brute force doesn't run away.
+**Layer 2 — But brute force without structure is just expensive noise.** loop-until-dry with single-critic + 3-round cap (not just "keep going") and escalate-to-human (not auto-accept) ensures the brute force has a stopping criterion. Cross-model adversarial verification ensures the brute force isn't just same-model echo. The governance layer ensures the brute force doesn't run away.
 
 The philosophical position: **epistemic certainty is expensive. v3.1 makes it cheap enough to be default-on, with structural guards against runaway cost.** If DeepSeek were $15/M tokens instead of $0.15, the architecture would be different. The economics enable the epistemology.
 
