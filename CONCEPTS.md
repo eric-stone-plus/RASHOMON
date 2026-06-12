@@ -113,6 +113,46 @@ Unchanged in v3.0. Measures the frequency of hm directional errors and Kyōmon's
 
 ---
 
+## Cross-Detection Asymmetry (CDA)
+
+**Definition**: The degree to which agent B detects errors in agent A's analysis that A's own self-audit missed — the operationalization of QUINTE's core epistemological insight.
+
+```
+CDA[A, B] = |errors_of_A_found_by_B| / |errors_of_A| - |errors_of_B_found_by_A| / |errors_of_B|
+```
+
+**Property**: Requires no ground truth. Observes relative detection rates between agent pairs. A positive CDA[hm, omp] means omp consistently finds errors hm's 鏡門 self-audit failed to catch.
+
+**v3.2 addition** (2026-06-12): CDA is the primary metric of KOZO (小僧), HIGHBALL's attention quality measurement layer. Ratified 5/5 QUINTE consensus.
+
+## Diversity Score
+
+**Definition**: A system-level health metric quantifying agent independence.
+
+```
+Diversity = 1 - mean(pairwise κ over all agent pairs)
+```
+
+where pairwise κ is Cohen's Kappa between agent confirm/not-confirm vectors.
+
+**Interpretation**: Diversity < 0.15 (all pairwise κ > 0.85) triggers an alert: agent outputs are highly correlated — the five agents may be functioning as one model in four additional costumes. This operationalizes the same-model diversity ceiling documented in REFINED-BRUTE-FORCE.md §3.5.
+
+**v3.2 addition** (2026-06-12): Ratified 5/5 QUINTE consensus.
+
+## Fleiss' Kappa (κ)
+
+**Definition**: Multi-rater agreement coefficient adjusted for chance agreement. `κ = (P_o - P_e) / (1 - P_e)`. Primary within-debate consistency metric. See [references/mathematical-foundations.md](references/mathematical-foundations.md) §5.
+
+**v3.2 addition** (2026-06-12): Ratified 5/5 QUINTE consensus. Replaces raw ≥3/5 vote counting with chance-adjusted agreement.
+
+## Normalized Mutual Information (NMI)
+
+**Definition**: Information-theoretic measure of structural similarity between debate agreement patterns. `NMI(X,Y) = 2·I(X;Y) / (H(X)+H(Y))`. Cross-debate drift detection at the debate-pair level. See [references/mathematical-foundations.md](references/mathematical-foundations.md) §6.
+
+**v3.2 addition** (2026-06-12): Requires ≥5 archived debates for stable estimation. Ratified 5/5 QUINTE consensus.
+
+---
+
 ## Glossary
 
 | Term | 日本語 / English | Reading | Meaning |
@@ -133,7 +173,12 @@ Unchanged in v3.0. Measures the frequency of hm directional errors and Kyōmon's
 | Partial Order Consensus | — | — | R2 consensus as partial order with incomparable pairs (JMLR 2023) |
 | Rashomon Ratio | — | — | Stability coefficient = |consensus| / |union| |
 | Uncertainty Decomposition | — | — | Aleatoric (雨門) vs Epistemic (證門) uncertainty routing |
+| CDA (Cross-Detection Asymmetry) | — | — | Relative error detection rates between agent pairs |
+| Diversity Score | — | — | System health: 1 - mean(pairwise κ) — flags same-model echo |
+| Fleiss' Kappa (κ) | — | — | Multi-rater agreement adjusted for chance |
+| NMI (Normalized Mutual Information) | — | — | Cross-debate structural similarity between agreement patterns |
+| KOZO | 小僧 | こぞう | HIGHBALL attention quality measurement layer |
 
 ---
 
-*CONCEPTS-v3.1.md — ratified 2026-06-09, updated 2026-06-10*
+*CONCEPTS-v3.2.md — ratified 2026-06-09, updated 2026-06-12 (CDA, Diversity Score, Fleiss' κ, NMI, KOZO)*

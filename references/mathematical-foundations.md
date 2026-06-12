@@ -73,6 +73,7 @@ RASHOMON already contains two mathematical constructs that require no external m
 | **Yabu no Naka Index (YNI)** | `1 - (intersection / union of claims)` | Jaccard Distance — the canonical set-based divergence metric |
 | **Loop-Until-Dry** | Dual-condition termination → single-critic + 3-round hard cap (v3.1) | Fixed-Point Convergence — parallels gradient-descent plateau detection heuristics |
 | **Fleiss' Kappa (κ)** | `κ = (P_o - P_e) / (1 - P_e)` — multi-rater agreement adjusted for chance | Inter-Rater Reliability — distinguishes genuine consensus from same-model echo |
+| **NMI (Normalized Mutual Information)** | `NMI(X,Y) = 2·I(X;Y)/(H(X)+H(Y))` — structural similarity between debate agreement patterns | Information Theory — detects cross-debate drift in *how* agents agree, not just *how much* |
 
 ---
 
@@ -145,6 +146,38 @@ Global κ aggregates all 5 agents. The pairwise κ matrix decomposes agreement i
 
 ---
 
+## 6. Normalized Mutual Information — Cross-Debate Structural Comparison (Cover & Thomas 1991)
+
+**Source**: Cover, T.M. & Thomas, J.A. (1991). *Elements of Information Theory*. Wiley.
+
+**Definition**: Normalized Mutual Information measures the dependence between two clusterings of the same set of objects:
+
+```
+NMI(X, Y) = 2 · I(X; Y) / (H(X) + H(Y))
+```
+
+where I(X;Y) is mutual information and H(·) is entropy. NMI ∈ [0,1]; 0 = independent clusterings, 1 = identical.
+
+**QUINTE mapping**: NMI operates at the **debate-pair** level, not the claim level. Two debates D_a and D_b are each represented as their agreement structure — the claim×agent binary matrix or its derived clustering. NMI(D_a, D_b) measures how structurally similar the two debates are.
+
+**Why debate-pair, not agent-pair.** Agent-pair NMI (comparing how agent A and agent B cluster claims within a single debate) requires sufficient claims per debate for stable estimation — a constraint rarely met in QUINTE's typical 10–40 claim range. Debate-pair NMI treats each debate as an object, comparing whole-debate agreement structures. This sidesteps the cold-start problem that agent-pair NMI faces.
+
+**Interpretation**:
+- NMI > 0.9 across consecutive debates → agreement structure is stable → system behavior is stationary
+- NMI declining over time → agreement patterns are shifting → potential model update effects, prompt degradation, or concept drift
+- NMI between debate pairs separated by a model update → direct measurement of how much the update changed agent behavior
+- Cluster of debates with high pairwise NMI → a "debate regime" — similar questions produce similar agreement patterns
+
+**Cold-start requirement**: NMI requires ≥5 debates for stable estimation. Before 5 debates, only κ time-series (κ-drift) is available. After 5+ debates, NMI complements κ-drift: κ-drift detects *magnitude* shifts in agreement, NMI detects *structural* shifts in how agreement is organized across agents.
+
+**Relationship to κ**: κ measures *how much* agents agree. NMI measures *how similarly* they agree across debates. A system can have stable κ (0.6 ± 0.05 across 10 debates) but decaying NMI — agents agree at the same rate, but *which* claims they agree on is shifting. This pattern would be invisible to κ alone.
+
+**Precision**: Computable once ≥5 debates are archived. No ground truth required. Debate-pair NMI avoids the "same items" trap that limits agent-pair NMI — debates are compared as structural objects, not as claim vectors.
+
+**Relationship to Diversity Score**: Diversity Score = 1 - mean(pairwise κ) measures *within-debate* agent independence. NMI measures *cross-debate* structural stability. Together they span both dimensions: Diversity tells you whether perspectives are genuinely independent; NMI tells you whether that independence is stable over time.
+
+---
+
 ## Excluded Concepts (and Why)
 
 | Concept | Reason for Exclusion |
@@ -164,6 +197,7 @@ Global κ aggregates all 5 agents. The pairwise κ matrix decomposes agreement i
 3. Xin, R., Zhong, C., Chen, Z., Takagi, T., Seltzer, M., & Rudin, C. (2022). "Exploring the Whole Rashomon Set of Sparse Decision Trees." *arXiv:2209.08040*.
 4. Li, S., Wang, R., Deng, Q., & Barnard, A. (2023). "Exploring the Cloud of Feature Interaction Scores in a Rashomon Set." *arXiv:2305.10181*.
 5. Fleiss, J.L. (1971). "Measuring Nominal Scale Agreement Among Many Raters." *Psychological Bulletin*, 76(5):378–382.
+6. Cover, T.M. & Thomas, J.A. (1991). *Elements of Information Theory*. Wiley.
 
 ---
 

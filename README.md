@@ -214,7 +214,7 @@ The third gate, 證 (*shō* = testimony, evidence), is the gate of witness confr
 
 v3.1 gives Shōmon a two-layer design. The **gate layer** (~1s, hm) makes a fast determination: is this question likely to produce a conclusion the user will rely on? If yes → authorize the full cc Workflow pipeline. If no (trivial file lookup, deterministic measurement, single-tool query with zero reasoning) → skip. The gate layer prevents wasting five agents on "where is this file" while ensuring nothing consequential slips through.
 
-The **execution layer** (30-180s, cc Workflow) is the full QUINTE pipeline: Phase 0 manifest generation, Phase 1 R1 four-agent parallel analysis, Phase 2 auto-diff claim extraction, Phase 3 R2 cross-model adversarial verification, Phase 4 rx pure reasoning cross-judgment, Phase 5 loop-until-dry convergence, Phase 6 KANSA audit. hm holds synchronous veto at every phase boundary — APPROVE, REJECT, ABORT, or MODIFY. The veto is blocking: cc cannot proceed without hm's approval. 15 seconds of silence triggers a PAUSE, never an auto-continue.
+The **execution layer** (30-180s, cc Workflow) is the full QUINTE pipeline: Phase 0 manifest generation, Phase 1 R1 four-agent parallel analysis, Phase 2 auto-diff claim extraction, Phase 3 R2 cross-model adversarial verification, Phase 4 rx pure reasoning cross-judgment, Phase 5 loop-until-dry convergence, Phase 6 KANSA Dual Verdict. hm holds synchronous veto at every phase boundary — APPROVE, REJECT, ABORT, or MODIFY. The veto is blocking: cc cannot proceed without hm's approval. 15 seconds of silence triggers a PAUSE, never an auto-continue.
 
 The gate layer and execution layer were conflated in v2.x — Shōmon was described as both "the check" and "the pipeline itself." v3.1 separates them explicitly. The gate opens the door. The pipeline walks through it.
 
@@ -301,7 +301,7 @@ The philosophical position: **epistemic certainty is expensive. v3.1 makes it ch
 |------|------|----------|
 | [RASHOMON](https://github.com/eric-stone-plus/RASHOMON) | Design philosophy | *Why* multi-perspective truth-seeking? |
 | [QUINTE](https://github.com/eric-stone-plus/QUINTE) | Debate protocol | *How* to orchestrate cross-examination? |
-| [HIGHBALL](https://github.com/eric-stone-plus/HIGHBALL) | Constraint layer | *Sound?* verdict audit + *May I?* authorization perimeter |
+| [HIGHBALL](https://github.com/eric-stone-plus/HIGHBALL) | Constraint layer | *Sound?* verdict audit + *May I?* authorization + *Attentive?* attention quality |
 
 ## Relationship
 
@@ -309,12 +309,13 @@ The philosophical position: **epistemic certainty is expensive. v3.1 makes it ch
 RASHOMON (why) ──→ QUINTE (how) ──→ conclusions
      │                                    │
      ├── HIGHBALL · KANSA (sound?) ── R3 audit ──────┤
-     └── HIGHBALL · KENGEN (may?) ── authorization ──┘
+     ├── HIGHBALL · KENGEN (may?) ── authorization ──┤
+     └── HIGHBALL · KOZO (attentive?) ── measurement ─┘
               │
               └── BANNIN (guard) — session-level enforcement
 ```
 
-RASHOMON and QUINTE form the epistemology→methodology axis. HIGHBALL bundles KANSA (verdict audit) and KENGEN (authorization perimeter with BANNIN guard).
+RASHOMON and QUINTE form the epistemology→methodology axis. HIGHBALL bundles KANSA (verdict audit), KENGEN (authorization perimeter with BANNIN guard), and KOZO (attention quality measurement).
 
 ## Cultural Anchors
 
