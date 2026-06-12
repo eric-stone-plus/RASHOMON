@@ -308,9 +308,9 @@ The philosophical position: **epistemic certainty is expensive. v3.1 makes it ch
 ```
 RASHOMON (why) ──→ QUINTE (how) ──→ conclusions
      │                                    │
-     ├── HIGHBALL · KANSA (sound?) ── R3 audit ──────┤
-     ├── HIGHBALL · KENGEN (may?) ── authorization ──┤
-     └── HIGHBALL · KOZO (attentive?) ── measurement ─┘
+     ├── KANSA (sound?) ── R3 audit ──────┤
+     ├── KENGEN (may?) ── authorization ──┤
+     └── KOZO (attentive?) ── measurement ─┘
               │
               └── BANNIN (guard) — session-level enforcement
 ```
