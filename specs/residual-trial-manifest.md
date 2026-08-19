@@ -27,7 +27,8 @@ under specified perturbations.
 ## 2. Relationship To The Trace
 
 `trial_manifest` is an optional top-level field in
-`schemas/residual-trace.schema.json`.
+`schemas/residual-trace.schema.json`. It was added in Trace `1.1`; the
+version registry lives in `specs/residual-first-architecture.md`.
 
 Earlier traces may lack it. New traces near protected or irreversible
 action boundaries should include it so a host can distinguish:
@@ -45,7 +46,8 @@ review signal, not a structural schema failure.
 
 - `manifest_version`: version of the trial manifest format.
 - `base_model_relation`: relationship among producing perspectives, such as `unknown`, `same_model`, `same_family`, `heterogeneous_models`, `mixed`, `human`, or `direct_evidence`.
-- `perspective_count`: number of perspectives or evidence routes represented.
+- `perspective_count`: number of perspectives or evidence routes represented;
+  it must equal the number of records in `perspectives`.
 - `perspectives`: perspective records with role, route, artifact, prompt hash, and independent first-pass flag.
 - `perturbation_axes`: controlled observer-position differences, such as role, evidence budget, order, adversarial duty, or reviewer position.
 - `independence_controls`: controls used to reduce contamination, such as separate artifacts, first-pass isolation, anonymous cross-review, fixed manifest, or source verification.

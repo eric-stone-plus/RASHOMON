@@ -6,9 +6,11 @@
 architecture. It asks the prior question: *why must perspectives confront each
 other, and what kind of truth emerges when they do?* It defines the residual
 ontology and the five gates (GATES.md) — the entry and verification
-requirements a review must satisfy — and it states which of those
-requirements an implementation enforces where. It does not prescribe *which*
-tools or models instantiate a perspective — that is an operational concern.
+requirements a review must satisfy — and, per gate, who or what enforces it:
+hm gate judgment, or the governance-boundary instrument's Protected-Write
+Guard. It does not prescribe *which* tools or models instantiate a perspective,
+and it does not pin gates to concrete repositories — each implementing stack
+records its own enforcement mapping — that is an operational concern.
 
 ## The Rashomon Problem
 

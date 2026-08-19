@@ -83,15 +83,15 @@ evidence, not final authority.
 4. Prefer direct runtime or source evidence over testimony when a claim is
    executable or externally verifiable.
 5. Use the adversarial review instrument when adversarial pressure is needed.
-7. Use the governance-boundary instrument when a residual approaches a
+6. Use the governance-boundary instrument when a residual approaches a
    protected action boundary.
-8. Use human review when machine debate reaches its ceiling.
-9. Record later observable outcomes separately from the original trace so route
+7. Use human review when machine debate reaches its ceiling.
+8. Record later observable outcomes separately from the original trace so route
    calibration can be falsified without rewriting history.
-10. Register route experiments before using a cohort to support future route
-    policy, so baselines, outcome windows, and stopping rules are not chosen
-    after the result.
-11. Treat route-policy synthesis as reviewed evidence, not automatic
+9. Register route experiments before using a cohort to support future route
+   policy, so baselines, outcome windows, and stopping rules are not chosen
+   after the result.
+10. Treat route-policy synthesis as reviewed evidence, not automatic
     self-modification.
 
 ## Residual Trace As Boundary Object

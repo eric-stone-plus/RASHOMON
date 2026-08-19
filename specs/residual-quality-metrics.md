@@ -9,7 +9,7 @@
 RASHOMON does not treat debate agreement as the main success metric. It treats
 residual quality as the measurable object.
 
-The measurement layer answers four questions:
+The measurement layer answers five questions:
 
 1. Did the run preserve material residuals instead of laundering them into a
    smooth answer?

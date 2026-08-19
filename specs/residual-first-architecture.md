@@ -197,7 +197,8 @@ Required residual fields:
 - `required_closure`: one of `none`, `edit`, `test`, `command`, `block`, `waiver`, or `human_review`.
 - `closure_state`: one of `open`, `closed`, `blocked`, `waived`, or `not_applicable`.
 - `closure_evidence`: evidence that justifies the closure state.
-- `scope`: the action scope covered by the closure state.
+- `scope`: the action scope covered by the closure state; must be a non-empty
+  string.
 
 The contract is intentionally shared with the governance-boundary instrument's
 residual closure ledger. RASHOMON defines what the fields mean; the adversarial
@@ -211,6 +212,23 @@ closure policy, but they should not redefine field names or allowed values.
 Minimal valid and blocking fixtures should live in downstream validation
 corpora, not in this repository.
 Trial manifest semantics are specified in `specs/residual-trial-manifest.md`.
+
+### Trace Versions
+
+`trace_version` is a `MAJOR.MINOR` string. This section is the registry of
+what each version means:
+
+- `1.0`: the base residual trace — `question`, `instrument`, `residuals`,
+  `action_boundary`, and `governance_decision`.
+- `1.1`: adds the optional `trial_manifest` section (`manifest_version`,
+  `base_model_relation`, `perspective_count`, `perspectives`,
+  `perturbation_axes`, `independence_controls`, `contamination_risks`, and
+  `cost`). No `1.0` field is renamed, removed, or given a narrower meaning.
+
+Earlier traces may lack the manifest and stay `1.0`. A trace that carries the
+trial-manifest field names as part of its exchanged contract cites `1.1`. A
+new version entry must be added here in the same change that extends the
+schema.
 
 ## 9. Instrument Responsibilities
 
@@ -276,7 +294,7 @@ Any residual-first run should leave a JSON-compatible artifact matching
 
 ```json
 {
-  "trace_version": "1.0",
+  "trace_version": "1.1",
   "question": "string",
   "instrument": "adversarial-review",
   "residuals": [
@@ -299,7 +317,7 @@ Any residual-first run should leave a JSON-compatible artifact matching
   "trial_manifest": {
     "manifest_version": "1.0",
     "base_model_relation": "same_model",
-    "perspective_count": 3,
+    "perspective_count": 1,
     "perspectives": [
       {
         "id": "Perspective A",

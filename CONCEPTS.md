@@ -79,6 +79,10 @@
   cross-examination route.
 - **Kan'nukimon**: anti-drift gate. Prompts use task-first framing, semantic
   isolation, and first-line restatement.
+- **Kennōmon**: architecture gate. Architecture-changing protected writes
+  require an external verdict trail; it is enforced by the
+  governance-boundary instrument's Protected-Write Guard, not by hm
+  self-enforcement.
 
 ## Metrics
 
